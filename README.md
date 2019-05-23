@@ -1,1 +1,3 @@
-# pathfinder
+# Pathfinder
+Less travelling, more sightseeing
+
