@@ -1,3 +1,9 @@
+#map-container{
+  height: -webkit-calc(100% - 60px);
+  height:    -moz-calc(100% - 60px);
+  height:         calc(100% - 60px);
+}
+
 #map{
   height: 100%;
 }
@@ -8,7 +14,12 @@ html, body {
   padding: 0;
 }
 
-h1 {text-align:center;}
+h1 {
+  text-align: center;
+  height: 40px;
+  margin: 0;
+  padding: 10px;
+}
 
 #description {
   font-family: Roboto;
@@ -40,8 +51,10 @@ h1 {text-align:center;}
 }
 
 #pac-container {
+  position: absolute;
   padding-bottom: 12px;
   margin-right: 12px;
+  bottom: 40px;
 }
 
 .pac-controls {
@@ -60,10 +73,11 @@ h1 {text-align:center;}
   font-family: Roboto;
   font-size: 15px;
   font-weight: 300;
-  margin-left: 12px;
   padding: 0 11px 0 13px;
   text-overflow: ellipsis;
-  width: 400px;
+  margin-top: 20px;
+  width: 200px;
+  height: 40px;
 }
 
 #pac-input:focus {
@@ -75,7 +89,7 @@ h1 {text-align:center;}
   background-color: #4d90fe;
   font-size: 25px;
   font-weight: 500;
-  padding: 6px 12px;
+  padding: 0px 0px;
 }
 #target {
   width: 345px;

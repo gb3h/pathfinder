@@ -2,7 +2,7 @@
 <html>
   <head>
     <title> PathFinder</title>
-    <h1> <b> PATH FINDER </b> </h1>
+    
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" href="testingmap.css">
@@ -11,9 +11,11 @@
 
 
   <body>
-  
+    <h1> <b> PATH FINDER </b> </h1>
     <input id="pac-input" class="controls" type="text" placeholder="Please enter a country.">
-    <div id="map"></div>
+    <div id="map-container">
+      <div id="map"></div>
+    </div>
     <script = type="text/javascript" src="testingmap.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQOCk29KyMP6NzMOgsS00V_XrOkjPgeJQ&libraries=places&callback=initAutocomplete"
     async defer></script>
