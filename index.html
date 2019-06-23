@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> PathFinder</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="google-signin-client_id" content="814348781756-at7u5j435edk45r985u1uitukt7sds5l.apps.googleusercontent.com">
+    <link rel="stylesheet" href="index.css">
+  </head>
+
+  <body>
+    <h1> <b> PATH FINDER </b> </h1>
+
+    <!-- Google sign-in button -->
+    <div class="g-signin2" data-width="250" data-height="50" data-longtitle="true"> </div>
+    <script = type="text/javascript" src="sign-in.js"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
+    <!-- Google sign-out button -->
+    <form action="http://localhost:8002">
+    <input type="submit" id = "sign-out" value= "Sign out" onclick="signOut();" />
+    </form>
+    <script = type="text/javascript" src="sign-out.js"></script>
+
+    <!-- Search country button-->
+    <input id="pac-input" class="controls" type="text" placeholder="Please enter a country.">
+
+    <!-- Integration with google maps -->
+    <div id="map-container">
+      <div id="map"></div>
+    </div>
+    <script = type="text/javascript" src="index.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQOCk29KyMP6NzMOgsS00V_XrOkjPgeJQ&libraries=places&callback=initAutocomplete"
+    async defer></script>
+
+    <!-- Circular buttons from 1 to 5 -->
+    <nav>
+      <ul class="nav">
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+      </ul>
+    </nav>
+  </body>
+
+</html>
