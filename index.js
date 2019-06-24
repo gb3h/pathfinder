@@ -344,10 +344,19 @@ function initAutocomplete() {
       }
     ]
   });
-  // Create the search box and link it to the UI element.
   var input = document.getElementById('pac-input');
   var searchBox = new google.maps.places.SearchBox(input);
   map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+
+
+  var temp = [null];
+  var locations = [];
+  var addLocationDiv = document.createElement('div');
+  var addLocation = new AddLocation(addLocationDiv, map, temp, locations);
+  map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(addLocationDiv);
+
+  // Create the search box and link it to the UI element.
+  
 
   // Bias the SearchBox results towards current map's viewport.
   map.addListener('bounds_changed', function() {
@@ -358,6 +367,8 @@ function initAutocomplete() {
 
   // Listen for the event fired when the user selects a prediction and retrieve
   // more details for that place.
+  
+  
   searchBox.addListener('places_changed', function() {
     var places = searchBox.getPlaces();
 
@@ -402,6 +413,12 @@ function initAutocomplete() {
       }
     });
     map.fitBounds(bounds);
+
+
+    if (places.length == 1) {
+      temp[0] = places[0];
+      //temp[0] = {lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng()};
+    }
   });
 
   var strictBounds = new google.maps.LatLngBounds(
@@ -426,5 +443,82 @@ function initAutocomplete() {
     else
       lastValidCenter = map.getCenter();
   });
-  
+
+}
+
+function AddLocation(controlDiv, map, wrappedLocObj, locations) {
+  // Set CSS for the control border.
+  var controlUI = document.createElement('div');
+  controlUI.style.backgroundColor = '#fff';
+  controlUI.style.border = '2px solid #fff';
+  controlUI.style.borderRadius = '3px';
+  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+  controlUI.style.cursor = 'pointer';
+  controlUI.style.marginBottom = '20px';
+  controlUI.style.textAlign = 'center';
+  controlUI.title = 'Click to add selected place';
+  controlDiv.appendChild(controlUI);
+
+  // Set CSS for the control interior.
+  var controlText = document.createElement('div');
+  controlText.style.color = 'rgb(25,25,25)';
+  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+  controlText.style.fontSize = '16px';
+  controlText.style.lineHeight = '38px';
+  controlText.style.paddingLeft = '5px';
+  controlText.style.paddingRight = '5px';
+  controlText.innerHTML = 'Add Selected Place';
+  controlUI.appendChild(controlText);
+
+  // Setup the click event listeners: simply set the map to Chicago.
+  controlUI.addEventListener('click', function() {
+    if ((wrappedLocObj[0] != null) && (!locations.includes(wrappedLocObj[0]))) {
+      locations.push(wrappedLocObj[0]);
+      console.log(locations);
+      UpdateButtons(locations, map);
+    }
+    console.log(locations);
+  });
+}
+
+function PlaceButton(controlDiv, map, location) {
+  var controlUI = document.createElement('div');
+  controlUI.style.backgroundColor = '#fff';
+  controlUI.style.border = '2px solid #fff';
+  controlUI.style.borderRadius = '3px';
+  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+  controlUI.style.cursor = 'pointer';
+  controlUI.style.marginBottom = '22px';
+  controlUI.style.textAlign = 'center';
+  controlUI.title = 'Click to view place';
+  controlDiv.appendChild(controlUI);
+
+  // Set CSS for the control interior.
+  var controlText = document.createElement('div');
+  controlText.style.color = 'rgb(25,25,25)';
+  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+  controlText.style.fontSize = '16px';
+  controlText.style.lineHeight = '38px';
+  controlText.style.paddingLeft = '5px';
+  controlText.style.paddingRight = '5px';
+  controlText.innerHTML = location.name;
+  controlUI.appendChild(controlText);
+
+  // Setup the click event listeners: simply set the map to Chicago.
+  controlUI.addEventListener('click', function() {
+    map.setCenter(location.geometry.location);
+  });
+
+}
+
+function UpdateButtons(listOfLocations, map) {
+  if (listOfLocations.length <= 0) { 
+    return; 
+  }
+  map.controls[google.maps.ControlPosition.RIGHT_CENTER].clear();
+  for (var i = 0; i < listOfLocations.length; i++) {  
+    var placeButtonDiv = document.createElement('div');
+    var placeButton = new PlaceButton(placeButtonDiv, map, listOfLocations[i]);
+    map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(placeButtonDiv);
+  }
 }
