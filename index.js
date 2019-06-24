@@ -414,7 +414,8 @@ function initAutocomplete() {
     });
     map.fitBounds(bounds);
 
-
+    // Whenever we perform a search, if the search returns a unique place, add that place to a wrapped temp object.
+    // This wrapped temp object will be passed to the AddLocation function button if the button is clicked.
     if (places.length == 1) {
       temp[0] = places[0];
       //temp[0] = {lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng()};
@@ -446,6 +447,8 @@ function initAutocomplete() {
 
 }
 
+// This function adds a selected location to the list 'locations' (stored in the initAutocomplete function).
+// Whenever a location is added, we also call UpdateButtons.
 function AddLocation(controlDiv, map, wrappedLocObj, locations) {
   // Set CSS for the control border.
   var controlUI = document.createElement('div');
@@ -470,7 +473,8 @@ function AddLocation(controlDiv, map, wrappedLocObj, locations) {
   controlText.innerHTML = 'Add Selected Place';
   controlUI.appendChild(controlText);
 
-  // Setup the click event listeners: simply set the map to Chicago.
+  // Setup the click event listeners: on click we check if the temp obj is already in our list of locations.
+  // If not, we add it to the list of locations and call UpdateButtons to add a button.
   controlUI.addEventListener('click', function() {
     if (wrappedLocObj[0] == null) {
       return;
@@ -517,10 +521,13 @@ function PlaceButton(controlDiv, map, location) {
 }
 
 function UpdateButtons(listOfLocations, map) {
+
+  // Just in case.
   if (listOfLocations.length <= 0) { 
     return; 
   }
 
+  // Clearing out old buttons just in case (hard update)
   if (document.getElementById('NavButtons')) {
     document.getElementById('NavButtons').childNodes.forEach(function(child){
       console.log(child);
@@ -530,8 +537,12 @@ function UpdateButtons(listOfLocations, map) {
     document.createElement('NavButtons');
   }
   var newButtons = document.createElement('NavButtons');
+
+  // Clearing the control MVC array just in case also.
   map.controls[google.maps.ControlPosition.RIGHT_CENTER].clear();
 
+
+  // For each place in the list of locations, we add a button for it on the RIGHT_CENTER of the map.
   for (var i = 0; i < listOfLocations.length; i++) {  
     var placeButtonDiv = document.createElement('div');
     newButtons.appendChild(placeButtonDiv);
