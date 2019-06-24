@@ -346,7 +346,7 @@ function initAutocomplete() {
   });
   var input = document.getElementById('pac-input');
   var searchBox = new google.maps.places.SearchBox(input);
-  map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+  map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(input);
 
 
   var temp = [null];
@@ -454,10 +454,10 @@ function AddLocation(controlDiv, map, wrappedLocObj, locations) {
   var controlUI = document.createElement('div');
   controlUI.style.backgroundColor = '#fff';
   controlUI.style.border = '2px solid #fff';
-  controlUI.style.borderRadius = '3px';
+  controlUI.style.borderRadius = '0px 15px 15px 0px';
   controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
   controlUI.style.cursor = 'pointer';
-  controlUI.style.marginBottom = '20px';
+  controlUI.style.marginBottom = '40px';
   controlUI.style.textAlign = 'center';
   controlUI.title = 'Click to add selected place';
   controlDiv.appendChild(controlUI);
@@ -467,10 +467,10 @@ function AddLocation(controlDiv, map, wrappedLocObj, locations) {
   controlText.style.color = 'rgb(25,25,25)';
   controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
   controlText.style.fontSize = '16px';
-  controlText.style.lineHeight = '38px';
+  controlText.style.lineHeight = '40px';
   controlText.style.paddingLeft = '5px';
   controlText.style.paddingRight = '5px';
-  controlText.innerHTML = 'Add Selected Place';
+  controlText.innerHTML = 'Add';
   controlUI.appendChild(controlText);
 
   // Setup the click event listeners: on click we check if the temp obj is already in our list of locations.
@@ -497,7 +497,7 @@ function PlaceButton(controlDiv, map, location) {
   controlUI.style.borderRadius = '3px';
   controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
   controlUI.style.cursor = 'pointer';
-  controlUI.style.marginBottom = '22px';
+  controlUI.style.marginTop = '20px';
   controlUI.style.textAlign = 'center';
   controlUI.title = 'Click to view place';
   controlDiv.appendChild(controlUI);
