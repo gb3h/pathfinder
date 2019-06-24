@@ -472,12 +472,17 @@ function AddLocation(controlDiv, map, wrappedLocObj, locations) {
 
   // Setup the click event listeners: simply set the map to Chicago.
   controlUI.addEventListener('click', function() {
-    if ((wrappedLocObj[0] != null) && (!locations.includes(wrappedLocObj[0]))) {
-      locations.push(wrappedLocObj[0]);
-      console.log(locations);
-      UpdateButtons(locations, map);
+    if (wrappedLocObj[0] == null) {
+      return;
     }
+    for (var i = 0; i < locations.length; i++) {
+      if (wrappedLocObj[0].place_id == locations[i].place_id) {
+        return;
+      }
+    }
+    locations.push(wrappedLocObj[0]);
     console.log(locations);
+    UpdateButtons(locations, map);
   });
 }
 
@@ -515,9 +520,21 @@ function UpdateButtons(listOfLocations, map) {
   if (listOfLocations.length <= 0) { 
     return; 
   }
+
+  if (document.getElementById('NavButtons')) {
+    document.getElementById('NavButtons').childNodes.forEach(function(child){
+      console.log(child);
+      document.getElementById('NavButtons').removeChild(child);
+    })
+  } else {
+    document.createElement('NavButtons');
+  }
+  var newButtons = document.createElement('NavButtons');
   map.controls[google.maps.ControlPosition.RIGHT_CENTER].clear();
+
   for (var i = 0; i < listOfLocations.length; i++) {  
     var placeButtonDiv = document.createElement('div');
+    newButtons.appendChild(placeButtonDiv);
     var placeButton = new PlaceButton(placeButtonDiv, map, listOfLocations[i]);
     map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(placeButtonDiv);
   }
