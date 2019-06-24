@@ -6,6 +6,7 @@ suggestions dropbar containing a mix of places and predicted search terms.
 
 function initAutocomplete() {
   var map = new google.maps.Map(document.getElementById('map'), {
+    backgroundColor: "#0e1626",
     center: {lat: 1.352083, lng: 103.819839}, //Singapore-centered
     zoom: 3,
     maxZoom: 15,
