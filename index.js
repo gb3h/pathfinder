@@ -8,7 +8,7 @@ function initAutocomplete() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 1.352083, lng: 103.819839}, //Singapore-centered
     zoom: 3,
-    maxZoom: 6,
+    maxZoom: 15,
     minZoom: 3,
     mapTypeId: 'roadmap',
     disableDefaultUI: true,

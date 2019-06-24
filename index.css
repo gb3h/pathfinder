@@ -79,14 +79,14 @@ h1 {
 }
 
 .pac-controls label {
-  font-family: Roboto;
+  font-family: 'Roboto';
   font-size: 13px;
   font-weight: 300;
 }
 
 #pac-input {
   background-color: #fff;
-  font-family: Roboto;
+  font-family: 'Roboto';
   font-size: 15px;
   font-weight: 300;
   padding: 0 11px 0 13px;
@@ -116,7 +116,7 @@ h1 {
 /* Google Sign-out button */
 #sign-out{
   background-color: #F5F5F5; color: black;
-  font-family: Roboto;
+  font-family: 'Roboto', Arial, sans-serif;
   font-size: 15px;
   font-weight: 400;
   border-radius: 1px;
