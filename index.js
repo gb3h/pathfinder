@@ -79,21 +79,20 @@ function initAutocomplete() {
           ]
       },
       {}
-  ] 
+  ]
   });
+
+  //Create the search box and link it to the UI element.
   var input = document.getElementById('pac-input');
   var searchBox = new google.maps.places.SearchBox(input);
   map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(input);
 
-
+  //Other variables: temp - wrappedLocObj, locations - list of locations, etc.
   var temp = [null];
   var locations = [];
   var addLocationDiv = document.createElement('div');
   var addLocation = new AddLocation(addLocationDiv, map, temp, locations);
   map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(addLocationDiv);
-
-  // Create the search box and link it to the UI element.
-  
 
   // Bias the SearchBox results towards current map's viewport.
   map.addListener('bounds_changed', function() {
@@ -104,11 +103,8 @@ function initAutocomplete() {
 
   // Listen for the event fired when the user selects a prediction and retrieve
   // more details for that place.
-  
-  
   searchBox.addListener('places_changed', function() {
     var places = searchBox.getPlaces();
-
     if (places.length == 0) {
       return;
     }
@@ -184,8 +180,11 @@ function initAutocomplete() {
 
 }
 
-// This function adds a selected location to the list 'locations' (stored in the initAutocomplete function).
-// Whenever a location is added, we also call UpdateButtons.
+/*
+This function adds a selected location to the list 'locations' (stored in the initAutocomplete function).
+Whenever a location is added, we also call UpdateButtons.
+*/
+
 function AddLocation(controlDiv, map, wrappedLocObj, locations) {
   // Set CSS for the control border.
   var controlUI = document.createElement('div');
@@ -207,7 +206,7 @@ function AddLocation(controlDiv, map, wrappedLocObj, locations) {
   controlText.style.lineHeight = '40px';
   controlText.style.paddingLeft = '5px';
   controlText.style.paddingRight = '5px';
-  controlText.innerHTML = 'Add';
+  controlText.innerHTML = 'Add'; //Add button to add location buttons by the side
   controlUI.appendChild(controlText);
 
   // Setup the click event listeners: on click we check if the temp obj is already in our list of locations.
@@ -228,13 +227,25 @@ function AddLocation(controlDiv, map, wrappedLocObj, locations) {
 }
 
 function PlaceButton(controlDiv, map, location) {
+  //Create close icon and set CSS for it.
+  var closeButton = document.createElement('a');
+  closeButton.style.color = '	#800000';
+  closeButton.style.fontFamily = 'Arial, sans-serif';
+  closeButton.style.fontSize = '24px';
+  closeButton.style.marginTop = '15px';
+  closeButton.style.paddingRight = '35px';
+  closeButton.innerHTML = "×";
+  controlDiv.appendChild(closeButton);
+
+  // Set CSS for the button background.
   var controlUI = document.createElement('div');
   controlUI.style.backgroundColor = '#fff';
   controlUI.style.border = '2px solid #fff';
   controlUI.style.borderRadius = '3px';
   controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
   controlUI.style.cursor = 'pointer';
-  controlUI.style.marginTop = '20px';
+  controlUI.style.marginTop = '-3px';
+  controlUI.style.marginBottom = '1px';
   controlUI.style.textAlign = 'center';
   controlUI.title = 'Click to view place';
   controlDiv.appendChild(controlUI);
@@ -245,23 +256,29 @@ function PlaceButton(controlDiv, map, location) {
   controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
   controlText.style.fontSize = '16px';
   controlText.style.lineHeight = '38px';
-  controlText.style.paddingLeft = '5px';
-  controlText.style.paddingRight = '5px';
+  controlText.style.paddingLeft = '10px';
+  controlText.style.paddingRight = '8px';
   controlText.innerHTML = location.name;
   controlUI.appendChild(controlText);
 
-  // Setup the click event listeners: simply set the map to Chicago.
+  // Setup the click event listeners: simply set the map to the chosen location.
   controlUI.addEventListener('click', function() {
     map.setCenter(location.geometry.location);
   });
 
+  // Setup the click close listeners: simply remove the location button
+  // and its contents.
+  closeButton.addEventListener('click', function() {
+    controlDiv.removeChild(closeButton);
+    controlDiv.removeChild(controlUI);
+    controlDiv.removeChild(controlText);
+  });
 }
 
 function UpdateButtons(listOfLocations, map) {
-
   // Just in case.
-  if (listOfLocations.length <= 0) { 
-    return; 
+  if (listOfLocations.length <= 0) {
+    return;
   }
 
   // Clearing out old buttons just in case (hard update)
@@ -278,9 +295,8 @@ function UpdateButtons(listOfLocations, map) {
   // Clearing the control MVC array just in case also.
   map.controls[google.maps.ControlPosition.RIGHT_CENTER].clear();
 
-
   // For each place in the list of locations, we add a button for it on the RIGHT_CENTER of the map.
-  for (var i = 0; i < listOfLocations.length; i++) {  
+  for (var i = 0; i < listOfLocations.length; i++) {
     var placeButtonDiv = document.createElement('div');
     newButtons.appendChild(placeButtonDiv);
     var placeButton = new PlaceButton(placeButtonDiv, map, listOfLocations[i]);
