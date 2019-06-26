@@ -221,12 +221,11 @@ function AddLocation(controlDiv, map, wrappedLocObj, locations) {
       }
     }
     locations.push(wrappedLocObj[0]);
-    console.log(locations);
     UpdateButtons(locations, map);
   });
 }
 
-function PlaceButton(controlDiv, map, location) {
+function PlaceButton(controlDiv, map, location, listOfLocations) {
   //Create close icon and set CSS for it.
   var closeButton = document.createElement('a');
   closeButton.style.color = '	#800000';
@@ -269,9 +268,11 @@ function PlaceButton(controlDiv, map, location) {
   // Setup the click close listeners: simply remove the location button
   // and its contents.
   closeButton.addEventListener('click', function() {
+    var ind = listOfLocations.indexOf(location);
+    listOfLocations.splice(ind, 1);
     controlDiv.removeChild(closeButton);
+    controlUI.removeChild(controlText);
     controlDiv.removeChild(controlUI);
-    controlDiv.removeChild(controlText);
   });
 }
 
@@ -284,7 +285,6 @@ function UpdateButtons(listOfLocations, map) {
   // Clearing out old buttons just in case (hard update)
   if (document.getElementById('NavButtons')) {
     document.getElementById('NavButtons').childNodes.forEach(function(child){
-      console.log(child);
       document.getElementById('NavButtons').removeChild(child);
     })
   } else {
@@ -299,7 +299,7 @@ function UpdateButtons(listOfLocations, map) {
   for (var i = 0; i < listOfLocations.length; i++) {
     var placeButtonDiv = document.createElement('div');
     newButtons.appendChild(placeButtonDiv);
-    var placeButton = new PlaceButton(placeButtonDiv, map, listOfLocations[i]);
+    var placeButton = new PlaceButton(placeButtonDiv, map, listOfLocations[i], listOfLocations);
     map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(placeButtonDiv);
   }
 }
