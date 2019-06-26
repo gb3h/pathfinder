@@ -95,6 +95,7 @@ function initAutocomplete() {
   var temp = [null];
   var locations = [];
   var addLocationDiv = document.createElement('div');
+
   var addLocation = new AddLocation(addLocationDiv, map, temp, locations, directionsService, directionsDisplay);
   map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(addLocationDiv);
 
@@ -358,17 +359,22 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLo
   var waypts = [];
   for (var i = 1; i < listOfLocations.length; i++) {
     waypts.push({
-      location: listOfLocations[i].place_id,
+      location: {'placeId': listOfLocations[i].place_id},
       stopover: true
     });
   }
 
+  console.log(listOfLocations[0].place_id);
+
   directionsService.route({
-    origin: listOfLocations[0].place_id,
-    destination: listOfLocations[0].place_id,
+    origin: {'placeId': listOfLocations[0].place_id},
+
+    destination: {'placeId': listOfLocations[1].place_id},
+
     waypoints: waypts,
-    optimizeWaypoints: true,
-    travelMode: 'TRANSIT'
+
+    optimizeWaypoints: false,
+    travelMode: 'DRIVING'
   }, function(response, status) {
     if (status === 'OK') {
       directionsDisplay.setDirections(response);
