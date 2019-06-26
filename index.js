@@ -82,6 +82,10 @@ function initAutocomplete() {
   ]
   });
 
+  var directionsService = new google.maps.DirectionsService;
+  var directionsDisplay = new google.maps.DirectionsRenderer;
+  directionsDisplay.setMap(map);
+
   //Create the search box and link it to the UI element.
   var input = document.getElementById('pac-input');
   var searchBox = new google.maps.places.SearchBox(input);
@@ -91,7 +95,7 @@ function initAutocomplete() {
   var temp = [null];
   var locations = [];
   var addLocationDiv = document.createElement('div');
-  var addLocation = new AddLocation(addLocationDiv, map, temp, locations);
+  var addLocation = new AddLocation(addLocationDiv, map, temp, locations, directionsService, directionsDisplay);
   map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(addLocationDiv);
 
   // Bias the SearchBox results towards current map's viewport.
@@ -157,7 +161,7 @@ function initAutocomplete() {
 
   var strictBounds = new google.maps.LatLngBounds(
     new google.maps.LatLng(85, -180),           // top left corner of map
-      new google.maps.LatLng(-85, 180)          // bottom right corner
+    new google.maps.LatLng(-85, 180)          // bottom right corner
   );
 
   var lastValidCenter = map.getCenter();
@@ -185,7 +189,7 @@ This function adds a selected location to the list 'locations' (stored in the in
 Whenever a location is added, we also call UpdateButtons.
 */
 
-function AddLocation(controlDiv, map, wrappedLocObj, locations) {
+function AddLocation(controlDiv, map, wrappedLocObj, locations, directionsService, directionsDisplay) {
   // Set CSS for the control border.
   var controlUI = document.createElement('div');
   controlUI.style.backgroundColor = '#fff';
@@ -221,7 +225,7 @@ function AddLocation(controlDiv, map, wrappedLocObj, locations) {
       }
     }
     locations.push(wrappedLocObj[0]);
-    UpdateButtons(locations, map);
+    UpdateButtons(locations, map, directionsService, directionsDisplay);
   });
 }
 
@@ -276,7 +280,7 @@ function PlaceButton(controlDiv, map, location, listOfLocations) {
   });
 }
 
-function UpdateButtons(listOfLocations, map) {
+function UpdateButtons(listOfLocations, map, directionsService, directionsDisplay) {
   // Just in case.
   if (listOfLocations.length <= 0) {
     return;
@@ -314,11 +318,11 @@ function UpdateButtons(listOfLocations, map) {
 
   var calculateButtonDiv = document.createElement('div');
   calculateButtons.appendChild(calculateButtonDiv);
-  var calculateButton = new CalculateButton(calculateButtonDiv, map, listOfLocations);
+  var calculateButton = new CalculateButton(calculateButtonDiv, map, listOfLocations, directionsService, directionsDisplay);
   map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(calculateButtonDiv);
 }
 
-function CalculateButton(controlDiv, map, listOfLocations) {
+function CalculateButton(controlDiv, map, listOfLocations, directionsService, directionsDisplay) {
   // Set CSS for the button background.
   var controlUI = document.createElement('div');
   controlUI.style.backgroundColor = '#fff';
@@ -345,5 +349,42 @@ function CalculateButton(controlDiv, map, listOfLocations) {
 
   // Setup the click event listeners: simply set the map to the chosen location.
   controlUI.addEventListener('click', function() {
+    calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLocations);
+  });
+}
+
+function calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLocations) {
+  var waypts = [];
+  for (var i = 1; i < listOfLocations.length; i++) {
+    waypts.push({
+      location: listOfLocations[i].place_id,
+      stopover: true
+    });
+  }
+
+  directionsService.route({
+    origin: listOfLocations[0].place_id,
+    destination: listOfLocations[0].place_id,
+    waypoints: waypts,
+    optimizeWaypoints: true,
+    travelMode: 'TRANSIT'
+  }, function(response, status) {
+    if (status === 'OK') {
+      directionsDisplay.setDirections(response);
+      var route = response.routes[0];
+      var summaryPanel = document.getElementById('directions-panel');
+      summaryPanel.innerHTML = '';
+      // For each route, display summary information.
+      for (var i = 0; i < route.legs.length; i++) {
+        var routeSegment = i + 1;
+        summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
+            '</b><br>';
+        summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+        summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+        summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+      }
+    } else {
+      window.alert('Directions request failed due to ' + status);
+    }
   });
 }
