@@ -229,7 +229,7 @@ function AddLocation(controlDiv, map, wrappedLocObj, locations, directionsServic
   });
 }
 
-function PlaceButton(controlDiv, map, location, listOfLocations) {
+function PlaceButton(controlDiv, map, location, listOfLocations, directionsService, directionsDisplay) {
   //Create close icon and set CSS for it.
   var closeButton = document.createElement('a');
   closeButton.style.color = '	#800000';
@@ -277,6 +277,7 @@ function PlaceButton(controlDiv, map, location, listOfLocations) {
     controlDiv.removeChild(closeButton);
     controlUI.removeChild(controlText);
     controlDiv.removeChild(controlUI);
+    UpdateButtons(listOfLocations, map, directionsService, directionsDisplay);
   });
 }
 
@@ -305,15 +306,15 @@ function UpdateButtons(listOfLocations, map, directionsService, directionsDispla
   var calculateButtons = document.createElement('CalculateButton');
 
   // Clearing the control MVC array just in case also.
-  map.controls[google.maps.ControlPosition.RIGHT_CENTER].clear();
+  map.controls[google.maps.ControlPosition.TOP_CENTER].clear();
   map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].clear();
 
   // For each place in the list of locations, we add a button for it on the RIGHT_CENTER of the map.
   for (var i = 0; i < listOfLocations.length; i++) {
     var placeButtonDiv = document.createElement('div');
     newButtons.appendChild(placeButtonDiv);
-    var placeButton = new PlaceButton(placeButtonDiv, map, listOfLocations[i], listOfLocations);
-    map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(placeButtonDiv);
+    var placeButton = new PlaceButton(placeButtonDiv, map, listOfLocations[i], listOfLocations, directionsService, directionsDisplay);
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(placeButtonDiv);
   }
 
   var calculateButtonDiv = document.createElement('div');
