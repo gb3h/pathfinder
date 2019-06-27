@@ -4,12 +4,13 @@ html, body {
   padding: 0;
 }
 
+
 /* Tab Title: Path Finder */
 #title {
   color: #fff;
   background-color: #4d90fe;
   font-size: 25px;
-  font-weight: 500;
+  font-weight: 100;
   padding: 0px 0px;
 }
 
@@ -20,9 +21,10 @@ h1 {
   height: 40px;
   padding: 20px 0px;
   margin: 0;
+  letter-spacing: 1.5px;
 }
 
-h1 a {
+h1, a{
   text-decoration: none;
   color: black;
   opacity: 0.9;
@@ -122,27 +124,169 @@ h1 a {
   width: 345px;
 }
 
-/* Google Sign-in button */
-.g-signin2 {
-  border-radius: 6px;
-  position: absolute;
-  top: 15px;
-  right: 10px;
-
-}
-
 /* Google Sign-out button */
 #sign-out{
-  background-color: #F5F5F5; color: black;
+  background-color: #FFFFFF; color: black;
   font-family: 'Roboto', Arial, sans-serif;
   font-size: 15px;
   font-weight: 400;
-  border-radius: 1px;
-  border-radius: 8%;
+  border-radius: 5px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .2);
-  width: 6em;
+  width: 7em;
   height: 50px;
   position: absolute;
   top: 10px;
   left: 10px;
+
+}
+
+/* New path button */
+#new-path{
+  background-color: #F5F5F5	; color: black;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  border-radius: 30px;
+  border-radius: 3%;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .2);
+  width: 8em;
+  height: 50px;
+  position: absolute;
+  top: 10px;
+  right: 345px;
+}
+
+/* Save path button */
+#save-path{
+  background-color: #F5F5F5	; color: black;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  border-radius: 30px;
+  border-radius: 3%;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .2);
+  width: 8em;
+  height: 50px;
+  position: absolute;
+  top: 10px;
+  right: 200px;
+}
+
+/* View existing paths button */
+#view-path{
+  background-color: #F5F5F5; color: black;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  border-radius: 30px;
+  border-radius: 3%;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .2);
+  width: 11em;
+  height: 50px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+/* Pop-up requiring sign-in first */
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+  z-index: 9;
+}
+
+.popup1, .popup2{
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup1 h2, .popup2 h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup1 .close, .popup2 .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup1 .close:hover, .popup2 .close:hover {
+  color: #06D85F;
+}
+.popup1 .content {
+  max-height: 30%;
+  overflow: auto;
+  font-family: Tahoma, Arial, sans-serif;
+
+}
+
+/* Google Sign-in button */
+.popup1 .g-signin2 {
+  max-height: 30%;
+  overflow: auto;
+  position: relative;
+  top: 1em;
+  left: 5em;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+
+/* List of routes buttons  */
+.popup2 * {
+  box-sizing: border-box;
+}
+
+/* Style the list (remove margins and bullets, etc) */
+.popup2 ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Style the list items */
+.popup2 ul li {
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  font-family: Tahoma, Arial, sans-serif;
+  color: black;
+  display: block;
+  position: relative;
+}
+
+/* Add a light grey background color on hover */
+.popup2 ul li:hover {
+  background-color: #eee;
 }
