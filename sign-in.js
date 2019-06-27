@@ -1,5 +1,6 @@
 function onSuccess(googleUser) {
   console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+  window.location.reload();
 }
 
 function onFailure(error) {
@@ -16,5 +17,4 @@ function renderButton() {
     'onsuccess': onSuccess,
     'onfailure': onFailure
   });
-
 }
