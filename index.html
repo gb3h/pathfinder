@@ -4,11 +4,16 @@
     <title> Pathfinder </title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
-    <meta name="google-signin-client_id" content="814348781756-kpu2m8rvfnar9ivrof6v7f0keqls4n0o.apps.googleusercontent.com">
+    <!-- http://localhost:8003 -->
+    <!-- <meta name="google-signin-client_id" content="814348781756-kpu2m8rvfnar9ivrof6v7f0keqls4n0o.apps.googleusercontent.com"> -->
+    <!-- http://localhost:8002 -->
+    <meta name="google-signin-client_id" content="814348781756-at7u5j435edk45r985u1uitukt7sds5l.apps.googleusercontent.com">
+    <link rel="stylesheet" href="dist/light-theme.min.css">
     <link rel="stylesheet" href="index.css">
   </head>
 
   <body>
+    <script src="dist/growl-notification.min.js"></script>
     <!-- Page Title -->
     <h1> <a href="#"><b> PATHFINDER </b> </a></h1>
 
@@ -28,12 +33,12 @@
     <div id="popup1" class="overlay">
     	<div id = "popup" class="popup1">
     		<h2>Please sign in first</h2>
-    		<a class="close" href="">&times;</a>
+    		<a id = "close1" class="close" href="">&times;</a>
     		<div class="content">
     			  <p> Click on the button below to sign in to view your saved paths. </p>
         </div>
         <!-- Google sign-in button -->
-        <div class="g-signin2" data-width="300" data-height="60" data-longtitle="false"> </div><p> </p>
+        <div class="g-signin2" data-width="300" data-height="60" data-longtitle="false" data-onsuccess="onSuccess"> </div><p> </p>
       </div>
     </div>
 
@@ -59,9 +64,10 @@
     </div>
 
     <!-- Load javascript files -->
-    <script = type="text/javascript" src="refresh.js"></script>
+
     <script = type="text/javascript" src="sign-in.js"></script>
     <script = type="text/javascript" src="sign-out.js"></script>
+    <script = type="text/javascript" src="refresh.js"></script>
     <script = type="text/javascript" src="save-path.js"></script>
     <script = type="text/javascript" src="autocomplete-search.js"></script>
     <script = type="text/javascript" src="choose-popup.js"></script>
@@ -71,5 +77,6 @@
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQOCk29KyMP6NzMOgsS00V_XrOkjPgeJQ&libraries=places&callback=initAutocomplete"
     async defer></script>
+
 
   </body>
