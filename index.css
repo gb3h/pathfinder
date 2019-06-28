@@ -140,6 +140,8 @@ h1, a{
 
 }
 
+/* Notify panel */
+
 /* New path button */
 #new-path{
   background-color: #F5F5F5	; color: black;
@@ -189,7 +191,7 @@ h1, a{
 }
 
 /* Pop-up requiring sign-in first */
-.overlay {
+.overlay{
   position: fixed;
   top: 0;
   bottom: 0;
@@ -201,7 +203,7 @@ h1, a{
   opacity: 0;
 }
 
-.overlay:target {
+.overlay:target{
   visibility: visible;
   opacity: 1;
   z-index: 9;
@@ -289,4 +291,14 @@ h1, a{
 /* Add a light grey background color on hover */
 .popup2 ul li:hover {
   background-color: #eee;
+}
+
+.growl-notification{
+  background:#fff;
+  border-radius: 30px;
+  border-radius: 2%;
+  box-shadow: 0 10px 10px 0 rgba(0, 0, 0, .2);
+  width:200px
+  font-size: 180px;
+  font-family: Tahoma, Arial, sans-serif;
 }
