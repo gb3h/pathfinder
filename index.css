@@ -298,7 +298,26 @@ h1, a{
   border-radius: 30px;
   border-radius: 2%;
   box-shadow: 0 10px 10px 0 rgba(0, 0, 0, .2);
-  width:200px
+  width:200px;
   font-size: 180px;
   font-family: Tahoma, Arial, sans-serif;
+}
+
+#directions-panel {
+  position: absolute;
+  right: 0;
+  top: 80px;
+  z-index: 9999;
+  margin-top: 10px;
+  background-color: #FFEE77;
+  padding: 10px;
+  overflow: scroll;
+  height: 400px;
+  width: 300px;
+}
+
+.handle {
+  cursor: grab;
+  font-family: "Font Awesome 5 Free";
+  height: 100%;
 }

@@ -61,22 +61,28 @@
     <!-- Integration with google maps -->
     <div id="map-container">
       <div id="map"></div>
+      <div class=sortable id="directions-panel"></div>
+      </div>
     </div>
 
-    <!-- Load javascript files -->
+    <!-- Directions Panel -->
 
-    <script = type="text/javascript" src="sign-in.js"></script>
-    <script = type="text/javascript" src="sign-out.js"></script>
-    <script = type="text/javascript" src="refresh.js"></script>
-    <script = type="text/javascript" src="save-path.js"></script>
-    <script = type="text/javascript" src="autocomplete-search.js"></script>
-    <script = type="text/javascript" src="choose-popup.js"></script>
-    <script = type="text/javascript" src="location-buttons.js"></script>
-    <script = type="text/javascript" src="display-route.js"></script>
-    <script = type="text/javascript" src="dummy-routes.js"></script>
+    <!-- Load javascript files -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script src="https://dagrejs.github.io/project/graphlib/latest/graphlib.js"></script>
+    <script type="text/javascript" src="sign-in.js"></script>
+    <script type="text/javascript" src="sign-out.js"></script>
+    <script type="text/javascript" src="refresh.js"></script>
+    <script type="text/javascript" src="save-path.js"></script>
+    <script type="text/javascript" src="autocomplete-search.js"></script>
+    <script type="text/javascript" src="choose-popup.js"></script>
+    <script type="text/javascript" src="display-route.js"></script>
+    <script type="text/javascript" src="location-buttons.js"></script>
+    <script type="text/javascript" src="dummy-routes.js"></script>
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQOCk29KyMP6NzMOgsS00V_XrOkjPgeJQ&libraries=places&callback=initAutocomplete"
     async defer></script>
+    
 
 
   </body>
