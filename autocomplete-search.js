@@ -86,11 +86,12 @@ function initAutocomplete() {
   });
 
   var directionsService = new google.maps.DirectionsService;
-  var directionsDisplay = new google.maps.DirectionsRenderer;
+  var directionsDisplay = new google.maps.DirectionsRenderer();
   directionsDisplay.setMap(map);
 
   //Create the search box and link it to the UI element.
   var input = document.getElementById('pac-input');
+
   var searchBox = new google.maps.places.SearchBox(input);
   map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(input);
 

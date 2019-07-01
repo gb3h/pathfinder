@@ -21,10 +21,10 @@
     <button id = "sign-out" onclick="signOut();" >Sign out</button>
 
     <!-- New path button -->
-    <button id = "new-path" onclick = "refresh()" >New path</button>
+    <button id = "new-path" onclick="document.location.reload(true)" >New path</button>
 
     <!-- Save path button -->
-    <button id = "save-path" onclick = "savePath()">Save path</button>
+    <button id = "save-path" onclick="savePath()">Save path</button>
 
     <!-- View existing paths button -->
     <button id = "view-path"> <a id ="link" href="#popup1" onclick = checkIfLoggedIn()> View existing path</button>
@@ -57,7 +57,6 @@
 
     <!-- Search country button-->
     <input id="pac-input" class="controls" type="text" placeholder="Enter a destination.">
-
     <!-- Integration with google maps -->
     <div id="map-container">
       <div id="map"></div>

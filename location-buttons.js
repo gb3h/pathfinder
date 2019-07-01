@@ -83,6 +83,7 @@ function PlaceButton(controlDiv, map, location, listOfLocations, directionsServi
 
   // Setup the click event listeners: simply set the map to the chosen location.
   controlUI.addEventListener('click', function() {
+    console.log(location.place_id);
     map.setCenter(location.geometry.location);
   });
 

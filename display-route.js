@@ -76,7 +76,6 @@ function CalculateButton(controlDiv, map, listOfLocations, directionsService, di
 // }
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLocations) {
-  
   var waypts = [];
   for (var i = 1; i < listOfLocations.length; i++) {
     waypts.push({
@@ -84,7 +83,11 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLo
       stopover: true
     });
   }
-
+  var summaryPanel = document.getElementById('directions-panel');
+  // Clear old data when func called.
+  while (summaryPanel.firstChild) {
+    summaryPanel.removeChild(summaryPanel.firstChild);
+  }
   directionsService.route({
     origin: {'placeId': listOfLocations[0].place_id},
 
@@ -99,6 +102,10 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLo
       directionsDisplay.setDirections(response);
       var route = response.routes[0];
       var summaryPanel = document.getElementById('directions-panel');
+      // Clear old data when func called.
+      // summaryPanel.childNodes.forEach(function(child){
+      //   summaryPanel.removeChild(child);
+      // })
       var sortable = new Sortable(summaryPanel, {animation: 150});
       // summaryPanel.innerHTML = '';
       // For each route, display summary information.

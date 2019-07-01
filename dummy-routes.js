@@ -79,8 +79,11 @@ function route1() {
       {}
   ]
   });
-  var locations = [{name: "Westgate", place_id: "ChIJ82AoVA8Q2jERkHnr1RPW9B4"},
-  {name: "Jurong East", place_id: "ChIJL52pCg8Q2jERgiWsODe3X9I"}];
+  var locations = [{name: "Four Seasons Hotel Singapore", place_id: "ChIJqbrxYIwZ2jERV9rTVcsl1Lk"},
+  {name: "Singapore Art Museum", place_id: "ChIJW8o1nqQZ2jERynZN2M1BODM"},
+  {name: "Marina Bay Sands", place_id: "ChIJnWdQKQQZ2jER8tbowGy5nn4"},
+  {name: "East Coast Park", place_id: "ChIJ0QX_Brki2jER-pZKNdqk_a8"}
+    ];
   directionsDisplay.setMap(map);
   UpdateButtons(locations, map, directionsService, directionsDisplay);
   calculateAndDisplayRoute(directionsService, directionsDisplay, locations);
