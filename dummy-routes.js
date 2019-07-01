@@ -83,7 +83,7 @@ function route1() {
   {name: "Jurong East", place_id: "ChIJL52pCg8Q2jERgiWsODe3X9I"}];
   directionsDisplay.setMap(map);
   UpdateButtons(locations, map, directionsService, directionsDisplay);
-  calculateAndDisplayRoute(directionsService, directionsDisplay,locations);
+  calculateAndDisplayRoute(directionsService, directionsDisplay, locations);
 };
 
 function route2() {
