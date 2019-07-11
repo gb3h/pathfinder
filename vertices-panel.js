@@ -15,7 +15,19 @@ function VerticesPanel(resultObject, map) {
     }
     var vp = document.createElement('VerticesPanel');
     vp.style.flex = "1";
-    var sortable = new Sortable(vp, {animation: 150});
+    var sortable = new Sortable(vp, {animation: 150, filter: '.filtered', onUpdate: function (/**Event*/evt) {
+        var itemEl = evt.item;  // dragged HTMLElement
+        console.log(itemEl);    
+        console.log("evt.to " + evt.to); // target list
+		console.log("evt.from " + evt.from);  // previous list
+		console.log("evt.oldIndex " + evt.oldIndex);  // element's old index within old parent
+		console.log("evt.newIndex " + evt.newIndex);  // element's new index within new parent
+		console.log("evt.oldDraggableIndex " + evt.oldDraggableIndex); // element's old index within old parent, only counting draggable elements
+		console.log("evt.newDraggableIndex " + evt.newDraggableIndex); // element's new index within new parent, only counting draggable elements
+		console.log("evt.clone " + evt.clone); // the clone element
+		console.log(evt.pullMode);  // when item is in another sortable: `"clone"` if cloning, `true` if moving
+        }
+    });
     // Clearing the control MVC array just in case also.
     map.controls[google.maps.ControlPosition.TOP_CENTER].clear();
   
@@ -25,6 +37,7 @@ function VerticesPanel(resultObject, map) {
       vp.appendChild(vertexDiv);
       if ((i === 0) || (i === (resultObject.geocoded_waypoints.length - 1))) {
         var j = i;
+        vertexDiv.className = "filtered";
       } else {
         var j = resultObject.routes[0].waypoint_order[i - 1] + 1;
       }
