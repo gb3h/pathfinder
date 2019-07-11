@@ -86,9 +86,9 @@ function route1() {
   {name: "East Coast Park", place_id: "ChIJ0QX_Brki2jER-pZKNdqk_a8"}
     ];
 //   directionsDisplay.setMap(map);
-//   UpdateButtons(locations, map, directionsService, directionsDisplay);
+    initAutocomplete.callUpdateButtons(locations);
 //  calculateAndDisplayRoute(directionsService, directionsDisplay, locations);
-    initAutocomplete.callCalculateAndDisplay(locations);
+    initAutocomplete.callCalculateAndDisplay(locations, false);
 };
 
 function route2() {

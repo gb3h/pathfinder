@@ -1,4 +1,4 @@
-function CalculateButton(controlDiv, map, listOfLocations, directionsService, directionsDisplay) {
+function CalculateButton(controlDiv, map, listOfLocations) {
   // Set CSS for the button background.
   var controlUI = document.createElement('div');
   controlUI.style.backgroundColor = '#fff';
@@ -25,7 +25,7 @@ function CalculateButton(controlDiv, map, listOfLocations, directionsService, di
 
   // Setup the click event listeners: simply set the map to the chosen location.
   controlUI.addEventListener('click', function() {
-    calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLocations);
+    initAutocomplete.callCalculateAndDisplay(listOfLocations, true);
     //var g = generateGraph(listOfLocations, directionsService);
     //var msp = prims(matrix);
   });
@@ -75,8 +75,10 @@ function CalculateButton(controlDiv, map, listOfLocations, directionsService, di
 //   return [answer];
 // }
 
-function calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLocations) {
+function calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLocations, mode) {
+  var result = {};
   var waypts = [];
+  var graphObj = {};
   for (var i = 1; i < listOfLocations.length; i++) {
     waypts.push({
       location: {'placeId': listOfLocations[i].place_id},
@@ -95,10 +97,11 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLo
 
     waypoints: waypts,
 
-    optimizeWaypoints: true,
+    optimizeWaypoints: mode,
     travelMode: 'DRIVING'
   }, function(response, status) {
     if (status === 'OK') {
+      initAutocomplete.setResult(JSON.parse(JSON.stringify(response)));
       directionsDisplay.setDirections(response);
       var route = response.routes[0];
       var summaryPanel = document.getElementById('directions-panel');

@@ -3,7 +3,7 @@ This function adds a selected location to the list 'locations' (stored in the in
 Whenever a location is added, we also call UpdateButtons.
 */
 
-function AddLocation(controlDiv, map, wrappedLocObj, locations, directionsService, directionsDisplay) {
+function AddLocation(controlDiv, map, wrappedLocObj, locations) {
   // Set CSS for the control border.
   var controlUI = document.createElement('div');
   controlUI.style.backgroundColor = '#fff';
@@ -39,12 +39,12 @@ function AddLocation(controlDiv, map, wrappedLocObj, locations, directionsServic
       }
     }
     locations.push(wrappedLocObj[0]);
-    UpdateButtons(locations, map, directionsService, directionsDisplay);
+    UpdateButtons(locations, map);
   });
 
 }
 
-function PlaceButton(controlDiv, map, location, listOfLocations, directionsService, directionsDisplay) {
+function PlaceButton(controlDiv, map, location, listOfLocations) {
   //Create close icon and set CSS for it.
   var closeButton = document.createElement('a');
   closeButton.style.color = '	#800000';
@@ -95,12 +95,12 @@ function PlaceButton(controlDiv, map, location, listOfLocations, directionsServi
     controlDiv.removeChild(closeButton);
     controlUI.removeChild(controlText);
     controlDiv.removeChild(controlUI);
-    UpdateButtons(listOfLocations, map, directionsService, directionsDisplay);
+    UpdateButtons(listOfLocations, map);
   });
 }
 
-function UpdateButtons(listOfLocations, map, directionsService, directionsDisplay) {
-  savePath(directionsService, directionsDisplay, listOfLocations);
+function UpdateButtons(listOfLocations, map) {
+  //savePath(directionsService, directionsDisplay, listOfLocations);
   // Just in case.
   if (listOfLocations.length <= 0) {
     return;
@@ -132,12 +132,13 @@ function UpdateButtons(listOfLocations, map, directionsService, directionsDispla
   for (var i = 0; i < listOfLocations.length; i++) {
     var placeButtonDiv = document.createElement('div');
     newButtons.appendChild(placeButtonDiv);
-    var placeButton = new PlaceButton(placeButtonDiv, map, listOfLocations[i], listOfLocations, directionsService, directionsDisplay);
+    var placeButton = new PlaceButton(placeButtonDiv, map, listOfLocations[i], listOfLocations);
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(placeButtonDiv);
   }
 
   var calculateButtonDiv = document.createElement('div');
   calculateButtons.appendChild(calculateButtonDiv);
-  var calculateButton = new CalculateButton(calculateButtonDiv, map, listOfLocations, directionsService, directionsDisplay);
+  //var calculateButton = initAutocomplete.initCalculateButton(calculateButtonDiv, map, listOfLocations);
+  var calculateButton = new CalculateButton(calculateButtonDiv, map, listOfLocations);
   map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(calculateButtonDiv);
 }

@@ -100,7 +100,7 @@ function initAutocomplete() {
   var locations = [];
   var addLocationDiv = document.createElement('div');
 
-  var addLocation = new AddLocation(addLocationDiv, map, temp, locations, directionsService, directionsDisplay);
+  var addLocation = new AddLocation(addLocationDiv, map, temp, locations);
   map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(addLocationDiv);
 
   // Bias the SearchBox results towards current map's viewport.
@@ -187,8 +187,27 @@ function initAutocomplete() {
       lastValidCenter = map.getCenter();
   });
 
-  function callCalculateAndDisplay(listOfLocations) {
-    calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLocations);
+  function callCalculateAndDisplay(listOfLocations, mode) {
+    return calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLocations);
   }
+
+  function callUpdateButtons(listOfLocations) {
+    UpdateButtons(listOfLocations, map);
+  }
+
+  function initCalculateButton(calculateButtonDiv, map, listOfLocations) {
+    return new CalculateButton(calculateButtonDiv, map, listOfLocations);
+  }
+
+  var result = {};
+  function setResult(response) {
+    result = response;
+    console.log(result);
+  }
+
   initAutocomplete.callCalculateAndDisplay = callCalculateAndDisplay;
+  initAutocomplete.callUpdateButtons = callUpdateButtons;
+  initAutocomplete.initCalculateButton = initCalculateButton;
+  initAutocomplete.setResult = setResult;
+
 }
