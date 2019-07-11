@@ -195,6 +195,10 @@ function initAutocomplete() {
     UpdateButtons(listOfLocations, map);
   }
 
+  function callVerticesPanel() {
+    VerticesPanel(result, map);
+  }
+
   function initCalculateButton(calculateButtonDiv, map, listOfLocations) {
     return new CalculateButton(calculateButtonDiv, map, listOfLocations);
   }
@@ -207,6 +211,7 @@ function initAutocomplete() {
 
   initAutocomplete.callCalculateAndDisplay = callCalculateAndDisplay;
   initAutocomplete.callUpdateButtons = callUpdateButtons;
+  initAutocomplete.callVerticesPanel = callVerticesPanel;
   initAutocomplete.initCalculateButton = initCalculateButton;
   initAutocomplete.setResult = setResult;
 

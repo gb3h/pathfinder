@@ -26,6 +26,7 @@ function CalculateButton(controlDiv, map, listOfLocations) {
   // Setup the click event listeners: simply set the map to the chosen location.
   controlUI.addEventListener('click', function() {
     initAutocomplete.callCalculateAndDisplay(listOfLocations, true);
+    initAutocomplete.callVerticesPanel();
     //var g = generateGraph(listOfLocations, directionsService);
     //var msp = prims(matrix);
   });
@@ -109,7 +110,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLo
       // summaryPanel.childNodes.forEach(function(child){
       //   summaryPanel.removeChild(child);
       // })
-      var sortable = new Sortable(summaryPanel, {animation: 150});
+      //var sortable = new Sortable(summaryPanel, {animation: 150});
       // summaryPanel.innerHTML = '';
       // For each route, display summary information.
       for (var i = 0; i < route.legs.length; i++) {
