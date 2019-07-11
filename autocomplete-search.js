@@ -187,4 +187,8 @@ function initAutocomplete() {
       lastValidCenter = map.getCenter();
   });
 
+  function callCalculateAndDisplay(listOfLocations) {
+    calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLocations);
+  }
+  initAutocomplete.callCalculateAndDisplay = callCalculateAndDisplay;
 }
