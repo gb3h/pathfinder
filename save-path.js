@@ -20,19 +20,31 @@ function savePath(){
          console.log(data);
          window.location.href = '#';
     });
-    notifySave();
+    notify("Save");
   } else {
       document.getElementById("save").setAttribute("href", "#popup1");
   }
 }
 
-function notifySave(){
-  var title = "Successful save";
+function updatePath(path_id){
+    $.ajax({
+       type: "POST",
+       data: {_id: path_id, locations: locations},
+       url: "update-path",
+    }).done(function(data){
+         console.log(data);
+         window.location.href = '#';
+    });
+    notify("Update");
+}
+
+function notify(process){
+  var title = "Successful " + process;
   var description = JSON.stringify(locations, ['name']);
   var type = "success";
   console.log("Saving in progress...");
   if (locations == undefined || locations.length <= 0){
-      title = "Save failed, no locations entered";
+      title = process + " failed, no locations entered";
       description = "Please try again"
       type = "error";
       console.log(locations);
