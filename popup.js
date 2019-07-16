@@ -17,6 +17,7 @@ function getLocations(){
   req.addEventListener('load',onLoad);
   req.addEventListener('error',onError);
   req.send();
+
 }
 
 function onLoad() {
@@ -33,6 +34,8 @@ function onError() {
 }
 
 function createList(all_routes){
+
+
   //Adding li nodes dynamically according to the number of saved routes
   var ul = document.getElementById("myList");
 
@@ -66,6 +69,7 @@ function createList(all_routes){
         initAutocomplete.callUpdateButtons(routex.route);
         initAutocomplete.callCalculateAndDisplay(routex.route, false);
         window.location.href = '#';
+        changeSaveToUpdate(node);
      };
      ul.appendChild(node);
         // Append <li> to <ul> with id="myList"
@@ -93,4 +97,12 @@ function deletePath(node){
      data: {_id: node.id},
      url: "delete-path"
   });
+}
+
+function changeSaveToUpdate(node){
+    var savebutton = document.querySelector("#save-path");
+    savebutton.innerHTML = "Update Path";
+    savebutton.onclick = function(){
+      updatePath(node.id);
+    }
 }
