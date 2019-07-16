@@ -13,7 +13,7 @@
   </head>
 
   <body>
-    <script src="dist/growl-notification.min.js"></script>
+
     <!-- Page Title -->
     <h1> <a href="#"><b> PATHFINDER </b> </a></h1>
 
@@ -21,13 +21,16 @@
     <button id = "sign-out" onclick="signOut();" >Sign out</button>
 
     <!-- New path button -->
-    <button id = "new-path" onclick="document.location.reload(true)" >New path</button>
+    <button id = "new-path" onclick="document.location.reload(true);" >New path</button>
 
     <!-- Save path button -->
-    <button id = "save-path" onclick="savePath()">Save path</button>
+    <!-- <form action = "/save-path" method = "post"> -->
+    <button id = "save-path"> <a id ="save" onclick = "savePath()" >Save path</button>
+      <!-- <input type = "submit" id = "save-path" value = "Save path" onclick = "savePath()"> -->
+    <!-- </form> -->
 
     <!-- View existing paths button -->
-    <button id = "view-path"> <a id ="link" href="#popup1" onclick = checkIfLoggedIn()> View existing path</button>
+    <button id = "view-path"> <a id ="view" href="#popup1" onclick = checkIfLoggedIn()> View existing path</button>
 
     <!-- Pop-up 1: requiring sign-in first if not signed in -->
     <div id="popup1" class="overlay">
@@ -45,12 +48,9 @@
     <!-- Pop-up 2: to choose routes if signed in-->
     <div id="popup2" class="overlay">
     	<div class="popup2">
-    		<h2>Please choose a route</h2>
+    		<h2><a href= "/paths">Please choose a route</a></h2>
     		<a class="close" href="#">&times;</a>
     		<ul>
-          <li onclick = "route1()">Route 1</li>
-          <li onclick = "initAutocomplete()">Route 2</li>
-          <li onclick = "route3()">Route 3</li>
         </ul>
       </div>
     </div>
@@ -69,20 +69,23 @@
     <!-- Load javascript files -->
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script src="https://dagrejs.github.io/project/graphlib/latest/graphlib.js"></script>
+    <script src="dist/growl-notification.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="sign-in.js"></script>
     <script type="text/javascript" src="sign-out.js"></script>
     <script type="text/javascript" src="refresh.js"></script>
     <script type="text/javascript" src="save-path.js"></script>
     <script type="text/javascript" src="autocomplete-search.js"></script>
-    <script type="text/javascript" src="choose-popup.js"></script>
+    <script type="text/javascript" src="popup.js"></script>
     <script type="text/javascript" src="display-route.js"></script>
     <script type="text/javascript" src="location-buttons.js"></script>
-    <script type="text/javascript" src="dummy-routes.js"></script>
     <script type="text/javascript" src="vertices-panel.js"></script>
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQOCk29KyMP6NzMOgsS00V_XrOkjPgeJQ&libraries=places&callback=initAutocomplete"
     async defer></script>
-    
+
+
 
 
   </body>
