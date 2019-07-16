@@ -106,6 +106,7 @@ app.post('/save-path', function(req, res){
       console.log("Error: Locations undefined. No locations have been entered");
     }
   });
+  res.redirect('/');
 });
 
 app.get('/paths', function(req, res) {
