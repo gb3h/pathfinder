@@ -112,8 +112,6 @@ app.post('/save-path', function(req, res){
 });
 
 app.post('/delete-path', function(req, res) {
-  if (user.email != undefined) {
-    console.log(req.body._id);
     Route.deleteOne({_id: req.body._id}, function(err){
       if (err) {
         console.log(err);
@@ -121,11 +119,20 @@ app.post('/delete-path', function(req, res) {
         console.log("Deleted route with id " + req.body._id);
       }
     });
-  } else {
-    // console.log("No email");
-    // res.redirect("/");
-  }
 });
+
+app.post('/update-path', function(req, res) {
+    Route.updateOne({_id: req.body._id}, {
+      route: req.body.locations
+    }, function(err, affected, resp){
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(resp);
+      }
+    });
+});
+
 app.get('/paths', function(req, res) {
   if (user.email != undefined) {
     Route.find({user_email: user.email}, function(err, all_routes){
