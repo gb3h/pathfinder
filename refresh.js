@@ -7,7 +7,7 @@ function refresh() {
               title: "Warning",
               description: 'This will delete any unsaved path made.',
               type: 'error',
-              position: 'top-right',
+              position: 'top-center',
               closeTimeout: 3000,
               animationDuration: 5,
               image: {
