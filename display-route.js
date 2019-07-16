@@ -27,6 +27,7 @@ function CalculateButton(controlDiv, map, listOfLocations) {
   controlUI.addEventListener('click', function() {
     initAutocomplete.callCalculateAndDisplay(listOfLocations, true);
     initAutocomplete.callVerticesPanel();
+    cleanPath(listOfLocations);
     //var g = generateGraph(listOfLocations, directionsService);
     //var msp = prims(matrix);
   });
@@ -41,7 +42,7 @@ function CalculateButton(controlDiv, map, listOfLocations) {
 //       if (i == j) {
 //         matrix[i][j] = -1;
 //       } else {
-//         const x = (calcRoute({'placeId': listOfLocations[i].place_id}, 
+//         const x = (calcRoute({'placeId': listOfLocations[i].place_id},
 //         {'placeId': listOfLocations[j].place_id}, "TRANSIT", directionsService));
 //         matrix[i][j] = x;
 //         console.log(x);
