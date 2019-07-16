@@ -192,6 +192,11 @@ function initAutocomplete() {
   }
 
   function callUpdateButtons(listOfLocations) {
+    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].removeAt(1);
+    var newaddLocationDiv = document.createElement('div');
+    temp = [null];
+    var newaddLocation = new AddLocation(newaddLocationDiv, map, temp, listOfLocations);
+    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(newaddLocationDiv);
     UpdateButtons(listOfLocations, map);
   }
 
