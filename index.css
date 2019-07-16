@@ -287,9 +287,28 @@ h1, a{
   position: relative;
 }
 
+.popup2 more-details {
+  color: #C0C0C0;
+  position: relative;
+  font-size: 15px;
+  display: block;
+  margin-top: 10px;
+
+}
+
 /* Add a light grey background color on hover */
 .popup2 ul li:hover {
   background-color: #eee;
+
+}
+
+.popup2 button {
+  color: #B22222;
+  font-size: 14px;
+  position: absolute;
+  font-family: 'Roboto', Arial, sans-serif;
+  right: 10px;
+  top: 15px;
 }
 
 /* .growl-notification{
@@ -306,7 +325,7 @@ h1, a{
   position: absolute;
   right: 0;
   top: 80px;
-  z-index: 9999;
+  z-index: 1;
   margin-top: 10px;
   background-color: #FFEE77;
   padding: 10px;
