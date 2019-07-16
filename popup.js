@@ -25,19 +25,26 @@ function onLoad() {
    var all_routes = JSON.parse(response);
    console.log(all_routes);
 
-   //Adding li nodes dynamically according to the number of saved routes
-   all_routes.forEach(function(routex, i) {
-     var node = document.createElement("li");                            // Create a <li> node
-     var textnode = document.createTextNode("Route " + (i + 1));         // Create a text node
-     node.appendChild(textnode);                                         // Append the text to <li>
-     document.getElementById("myList").appendChild(node);     // Append <li> to <ul> with id="myList"
-     node.onclick = function() {
-       initAutocomplete.callUpdateButtons(routex.route);
-       initAutocomplete.callCalculateAndDisplay(routex.route, false);
-       window.location.href = '#';
+    //Adding li nodes dynamically according to the number of saved routes
+    var ul = document.getElementById("myList");
 
-     };
- });
+   if (!ul.hasChildNodes()) {
+     all_routes.forEach(function(routex, i) {
+
+       var node = document.createElement("li");                     // Create a <li> node
+       var textnode = document.createTextNode("Route " + (i + 1));  // Create a text node
+       node.appendChild(textnode);                                  // Append the text to <li>
+       ul.appendChild(node);     // Append <li> to <ul> with id="myList"
+       node.onclick = function() {
+          initAutocomplete.callUpdateButtons(routex.route);
+          initAutocomplete.callCalculateAndDisplay(routex.route, false);
+          window.location.href = '#';
+       };
+     });
+    } else {
+       console.log("Already contain");
+    }
+
 }
 
 function onError() {
