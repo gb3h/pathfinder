@@ -100,7 +100,6 @@ function PlaceButton(controlDiv, map, location, listOfLocations) {
 }
 
 function UpdateButtons(listOfLocations, map) {
-  //savePath(directionsService, directionsDisplay, listOfLocations);
   // Just in case.
   if (listOfLocations.length <= 0) {
     return;
