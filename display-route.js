@@ -26,7 +26,7 @@ function CalculateButton(controlDiv, map, listOfLocations) {
   // Setup the click event listeners: simply set the map to the chosen location.
   controlUI.addEventListener('click', function() {
     initAutocomplete.callCalculateAndDisplay(listOfLocations, true);
-    initAutocomplete.callVerticesPanel();
+    initAutocomplete.callVerticesPanel(listOfLocations);
     cleanPath(listOfLocations);
     //var g = generateGraph(listOfLocations, directionsService);
     //var msp = prims(matrix);
@@ -108,11 +108,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLo
       var route = response.routes[0];
       var summaryPanel = document.getElementById('directions-panel');
       // Clear old data when func called.
-      // summaryPanel.childNodes.forEach(function(child){
-      //   summaryPanel.removeChild(child);
-      // })
-      //var sortable = new Sortable(summaryPanel, {animation: 150});
-      // summaryPanel.innerHTML = '';
+      summaryPanel.style.visibility = "visible";
       // For each route, display summary information.
       for (var i = 0; i < route.legs.length; i++) {
         var slide = document.createElement('div');
