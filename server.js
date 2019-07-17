@@ -20,8 +20,8 @@ mongoose.connect("mongodb+srv://phoebe:pfpassword@cluster0-pbd6q.mongodb.net/pf_
 
 // Create Place Schema for stored route data
 var locationSchema = new mongoose.Schema({
-  name: String,
-  place_id: String
+  name: {type: String, required: true},
+  place_id: {type: String, required: true}
 });
 
 // Create User Schema for stored user data
