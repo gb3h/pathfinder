@@ -200,8 +200,8 @@ function initAutocomplete() {
     UpdateButtons(listOfLocations, map);
   }
 
-  function callVerticesPanel() {
-    VerticesPanel(result, map);
+  function callVerticesPanel(listOfLocations) {
+    VerticesPanel(result, map, listOfLocations);
   }
 
   function initCalculateButton(calculateButtonDiv, map, listOfLocations) {
