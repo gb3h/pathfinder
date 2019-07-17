@@ -44,14 +44,15 @@ function createList(all_routes){
 
      var node = document.createElement("li");                     // Create a <li> node
      node.setAttribute("id", routex._id);
-     routex.route.forEach(function(location, i) {
-       if (i >= 1){
-         node.appendChild(document.createTextNode(", " + location.name));
-       } else {
-         node.appendChild(document.createTextNode(location.name));
-       }
-     });
-
+     if (routex.route != null) {
+       routex.route.forEach(function(location, i) {
+         if (i >= 1){
+           node.appendChild(document.createTextNode(", " + location.name));
+         } else {
+           node.appendChild(document.createTextNode(location.name));
+         }
+       });
+     }
      var details = document.createElement("more-details");
      // var options = { weekday: 'long',
      //                 year: 'numeric',
