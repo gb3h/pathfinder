@@ -97,7 +97,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLo
             for (j = 0; j < route.legs.length; j += 1) {
                 slide.className = "slide";
                 summaryPanel.appendChild(slide);
-                routeSegment = i + 1;
+                routeSegment = j + 1;
                 slide.innerHTML += '<b>Route Segment: ' + routeSegment +
                     '</b><br>';
                 slide.innerHTML += route.legs[j].start_address + ' to ';
