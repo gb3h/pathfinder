@@ -25,14 +25,12 @@
     <button id = "new-path" onclick="document.location.reload(true);" >New path</button>
 
     <!-- Save path button -->
-    <!-- <form action = "/save-path" method = "post"> -->
     <button id = "save-path"> <a id ="save" onclick = "savePath()" >Save path</button>
-      <!-- <input type = "submit" id = "save-path" value = "Save path" onclick = "savePath()"> -->
-    <!-- </form> -->
 
     <!-- View existing paths button -->
     <button id = "view-path"> <a id ="view" href="#popup1" onclick = checkIfLoggedIn()> View existing path</button>
 
+    </script>
     <!-- Pop-up 1: requiring sign-in first if not signed in -->
     <div id="popup1" class="overlay">
     	<div id = "popup" class="popup1">
@@ -56,38 +54,47 @@
     </div>
 
     <!-- Search country button-->
-    <input id="pac-input" class="controls" type="text" placeholder="Enter a destination.">
+    <input name = "search" id="pac-input" class="controls" type="text" placeholder="Enter a destination." autofocus>
+
     <!-- Integration with google maps -->
     <div id="map-container">
       <div id="map"></div>
+
+      <!-- Directions Panel -->
       <div class=sortable id="directions-panel"></div>
+
+      <!-- Image Panel -->
+      <div id="image-panel">
+        <img id = "location-image" alt = "Image is loading..."></img>
+          <span id = "rating" class="rating-static rating-0"></span>
+          <p id = "info"></p>
       </div>
     </div>
 
-    <!-- Directions Panel -->
-
     <!-- Load javascript files -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script src="https://dagrejs.github.io/project/graphlib/latest/graphlib.js"></script>
-    <script src="dist/growl-notification.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="dist/growl-notification.min.js"></script>
+    <script src="keyboard-shortcuts/mousetrap.min.js"></script>
+    <script src="keyboard-shortcuts/mousetrap-global-bind.js"></script>
+    <script src="keyboard-shortcuts/keyboard-shortcuts.js"></script>
     <script type="text/javascript" src="sign-in.js"></script>
     <script type="text/javascript" src="sign-out.js"></script>
     <script type="text/javascript" src="refresh.js"></script>
     <script type="text/javascript" src="save-path.js"></script>
-    <script type="text/javascript" src="autocomplete-search.js"></script>
-    <script type="text/javascript" src="popup.js"></script>
-    <script type="text/javascript" src="display-route.js"></script>
+    <script type="text/javascript" src="update-path.js"></script>
+    <script type="text/javascript" src="delete-path.js"></script>
     <script type="text/javascript" src="location-buttons.js"></script>
+    <script type="text/javascript" src="autocomplete-search.js"></script>
+    <script type="text/javascript" src="load-popup.js"></script>
+    <script type="text/javascript" src="calculate-display-path.js"></script>
     <script type="text/javascript" src="vertices-panel2.js"></script>
+    <script type="text/javascript" src="image-panel.js"></script>
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQOCk29KyMP6NzMOgsS00V_XrOkjPgeJQ&libraries=places&callback=initAutocomplete"
     async defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-
-
-
 
   </body>
