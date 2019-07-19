@@ -22,11 +22,15 @@ function refresh() {
         buttons: {
             cancel: {
                 text: 'Cancel',
-                callback: function () { return; }
+                callback: function () {
+                    return;
+                }
             },
             action: {
                 text: 'Ok',
-                callback: function () {window.location.reload(); }
+                callback: function () {
+                    window.location.reload();
+                }
             }
         }
     }); // or (new GrowlNotification(options)).show();

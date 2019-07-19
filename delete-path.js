@@ -6,7 +6,9 @@ function deletePath(node) {
     "use strict";
     $.ajax({
         type: "POST",
-        data: {_id: node.id},
+        data: {
+            _id: node.id
+        },
         url: "delete-path"
     });
 }

@@ -11,7 +11,10 @@ function initAutocomplete() {
     "use strict";
     var map = new google.maps.Map(document.getElementById('map'), {
             backgroundColor: "#0099dd",
-            center: {lat: 1.352083, lng: 103.819839}, //Singapore-centered
+            center: {
+                lat: 1.352083,
+                lng: 103.819839
+            }, //Singapore-centered
             zoom: 3,
             maxZoom: 15,
             minZoom: 3,
@@ -103,8 +106,8 @@ function initAutocomplete() {
 
         //Variables: strictBounds, lastValidCenter
         strictBounds = new google.maps.LatLngBounds(
-            new google.maps.LatLng(85, -180),           // top left corner of map
-            new google.maps.LatLng(-85, 180)          // bottom right corner
+            new google.maps.LatLng(85, -180), // top left corner of map
+            new google.maps.LatLng(-85, 180) // bottom right corner
         ),
         lastValidCenter = map.getCenter();
 

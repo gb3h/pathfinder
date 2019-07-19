@@ -53,7 +53,9 @@ function onSuccess(googleUser) {
     "use strict";
     var profile = googleUser.getBasicProfile();
     window.location.href = '#';
-    setTimeout(function () {welcome(profile); }, 1000);
+    setTimeout(function () {
+        welcome(profile);
+    }, 1000);
     updateUserData(profile);
 }
 

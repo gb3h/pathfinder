@@ -1,6 +1,8 @@
 /*global document, window, alert, console, require, google, gapi, moment, $*/
 /*jslint nomen: true */
-var locations = [], GrowlNotification, Mousetrap;
+var locations = [],
+    GrowlNotification,
+    Mousetrap;
 
 // Cleans location photos to give correct format
 function cleanPhotos(location) {
@@ -100,7 +102,9 @@ function savePath() {
     if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
         $.ajax({
             type: "POST",
-            data: {locations: locations},
+            data: {
+                locations: locations
+            },
             url: "save-path"
         }).done(function () {
             window.location.href = '#';
@@ -118,7 +122,10 @@ function updatePath(path_id, locations) {
     "use strict";
     $.ajax({
         type: "POST",
-        data: {_id: path_id, locations: locations},
+        data: {
+            _id: path_id,
+            locations: locations
+        },
         url: "update-path"
     }).done(function () {
         window.location.href = '#';

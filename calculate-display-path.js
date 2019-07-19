@@ -62,7 +62,9 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLo
 
     for (i = 1; i < listOfLocations.length; i += 1) {
         waypts.push({
-            location: {'placeId': listOfLocations[i].place_id},
+            location: {
+                'placeId': listOfLocations[i].place_id
+            },
             stopover: true
         });
     }
@@ -72,9 +74,13 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLo
         summaryPanel.removeChild(summaryPanel.firstChild);
     }
     directionsService.route({
-        origin: {'placeId': listOfLocations[0].place_id},
+        origin: {
+            'placeId': listOfLocations[0].place_id
+        },
 
-        destination: {'placeId': listOfLocations[0].place_id},
+        destination: {
+            'placeId': listOfLocations[0].place_id
+        },
 
         waypoints: waypts,
 

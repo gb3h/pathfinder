@@ -9,7 +9,9 @@ app.use(express.static(__dirname));
 
 //For parsing json files
 app.use(express.json()); // for parsing application/json
-app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(express.urlencoded({
+    extended: true
+})); // for parsing application/x-www-form-urlencoded
 
 //Start Mongoose connection to db called pf_users
 var mongoose = require('mongoose');
@@ -19,19 +21,30 @@ Standard format: mongoose.connect('mongodb://username:password@host:port/databas
 Other format: mongoose.connect('mongodb://host:port/database');
 */
 // mongoose.connect("mongodb://localhost:27017/pf_users", {useNewUrlParser: true});
-mongoose.connect("mongodb+srv://phoebe:pfpassword@cluster0-pbd6q.mongodb.net/pf_users", {useNewUrlParser: true});
+mongoose.connect("mongodb+srv://phoebe:pfpassword@cluster0-pbd6q.mongodb.net/pf_users", {
+    useNewUrlParser: true
+});
 
 // Create Route Schema for stored route data
 var openingHoursSchema = new mongoose.Schema({
     weekday_text: [String]
-  // open_now: {type: Boolean, default: true}
+    // open_now: {type: Boolean, default: true}
 });
 
 // Create Place Schema for stored route data
 var locationSchema = new mongoose.Schema({
-    name: {type: String, required: true},
-    place_id: {type: String, required: true},
-    photos: {type: [String], required: true},
+    name: {
+        type: String,
+        required: true
+    },
+    place_id: {
+        type: String,
+        required: true
+    },
+    photos: {
+        type: [String],
+        required: true
+    },
     rating: Number,
     opening_hours: openingHoursSchema
 });
@@ -45,9 +58,19 @@ var userSchema = new mongoose.Schema({
 
 // Create Route Schema for stored route data
 var routeSchema = new mongoose.Schema({
-    user_email: {type: String, required: true},
-    route: {type : [locationSchema], required: true},
-    created_at: {type: Date, required: true, default: Date.now }
+    user_email: {
+        type: String,
+        required: true
+    },
+    route: {
+        type: [locationSchema],
+        required: true
+    },
+    created_at: {
+        type: Date,
+        required: true,
+        default: Date.now
+    }
 });
 
 // Create collections named users and routes
@@ -66,7 +89,9 @@ app.post('/save-user', function (req) {
     });
 
     // Check if user has been registered before
-    User.find({email: req.body.email}, function (err, user_found) {
+    User.find({
+        email: req.body.email
+    }, function (err, user_found) {
         if (err) {
             console.log(err);
         } else if (user_found.length === 0) {
@@ -87,18 +112,21 @@ app.post('/save-path', function (req, res) {
         user_email: user.email,
         route: req.body.locations
     });
-    Route.find({user_email: user.email}, function (err, routes_found) {
+    Route.find({
+        user_email: user.email
+    }, function (err, routes_found) {
         if (err) {
             console.log(err);
 
-        // No routes saved before, save first ever route
+            // No routes saved before, save first ever route
         } else if (routes_found.length === 0) {
             console.log("Saving first ever route..." + route);
             route.save();
 
-        // Check for identical existing paths
+            // Check for identical existing paths
         } else if (routes_found.length > 0) {
-            var savedBefore = false, savedRecord;
+            var savedBefore = false,
+                savedRecord;
             routes_found.forEach(function (route) {
                 if (JSON.stringify(route.route, ["name"]) === JSON.stringify(req.body.locations, ["name"])) {
                     savedBefore = true;
@@ -110,7 +138,7 @@ app.post('/save-path', function (req, res) {
                 console.log("This route has already been saved before. Record is as below");
                 console.log(savedRecord);
             } else {
-              // Path has not been saved before
+                // Path has not been saved before
                 console.log("Not saved before");
 
                 // Check if locations are defined
@@ -137,7 +165,9 @@ app.post('/save-path', function (req, res) {
 // Find path by its _id to delete it
 app.post('/delete-path', function (req) {
     "use strict";
-    Route.deleteOne({_id: req.body._id}, function (err) {
+    Route.deleteOne({
+        _id: req.body._id
+    }, function (err) {
         if (err) {
             console.log(err);
         } else {
@@ -149,7 +179,9 @@ app.post('/delete-path', function (req) {
 // Find path by its _id to update it
 app.post('/update-path', function (req) {
     "use strict";
-    Route.updateOne({_id: req.body._id}, {
+    Route.updateOne({
+        _id: req.body._id
+    }, {
         route: req.body.locations
     }, function (err, resp) {
         if (err) {
@@ -164,7 +196,9 @@ app.post('/update-path', function (req) {
 app.get('/paths', function (resp, res) {
     "use strict";
     if (user.email !== undefined) {
-        Route.find({user_email: user.email}, function (err, all_routes) {
+        Route.find({
+            user_email: user.email
+        }, function (err, all_routes) {
             if (err) {
                 console.log(err);
             } else {
