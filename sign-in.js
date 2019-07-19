@@ -62,13 +62,17 @@ function onSuccess(googleUser) {
 // Log user in
 function renderButton() {
     "use strict";
-    gapi.signin2.render('g-signin2', {
-        'scope': 'profile email',
-        'width': 240,
-        'height': 50,
-        'longtitle': true,
-        'theme': 'dark',
-        'onsuccess': onSuccess,
-        'onfailure': onFailure
-    });
+    try {
+        gapi.signin2.render('g-signin2', {
+            'scope': 'profile email',
+            'width': 240,
+            'height': 50,
+            'longtitle': true,
+            'theme': 'dark',
+            'onsuccess': onSuccess,
+            'onfailure': onFailure
+        });
+    } catch (e) {
+        console.log(e);
+    }
 }

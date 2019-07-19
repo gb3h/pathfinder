@@ -5,12 +5,12 @@ var Sortable, cleanPath, initAutocomplete;
 function verticesPanel(map, listOfLocations) {
     "use strict";
     // Clearing out old buttons just in case (hard update)
-    if (document.getElementById('VerticesPanel')) {
-        document.getElementById('VerticesPanel').childNodes.forEach(function (child) {
-            document.getElementById('VerticesPanel').removeChild(child);
+    if (document.getElementById('directions-panel')) {
+        document.getElementById('directions-panel').childNodes.forEach(function (child) {
+            document.getElementById('directions-panel').removeChild(child);
         });
     } else {
-        document.createElement('VerticesPanel');
+        document.createElement('directions-panel');
     }
     map.controls[google.maps.ControlPosition.TOP_CENTER].clear();
 
@@ -37,7 +37,7 @@ function verticesPanel(map, listOfLocations) {
 
     vp.setAttribute('id', 'sortable');
     listOfLocations.forEach(function (location) {
-        var li = document.createElement("li"),                  // Create a <li> node
+        var li = document.createElement("li"), // Create a <li> node
             arrow = document.createElement("span");
         li.setAttribute("class", "ui-state-default");
         li.innerHTML = location.name;

@@ -11,7 +11,7 @@ var rating = document.getElementById('rating');
 function getImageUrl(location) {
     "use strict";
     var photo_url = '';
-    if (location.photos !== undefined && image !== null) {
+    if (location.photos[0] !== undefined && image !== null) {
         if (typeof location.photos[0] === "string") {
             photo_url = location.photos[0];
         } else {
@@ -28,7 +28,6 @@ function getRating(location) {
     "use strict";
     var rating_title = "<br> Rating: ";
     if (location.rating !== undefined) {
-        console.log(location.rating);
         rating_title += location.rating + '</br>';
         rating.setAttribute('class', 'rating-static rating-' +
             Math.ceil(location.rating * 10 / 5) * 5);
@@ -44,7 +43,6 @@ function getOpeningHours(location) {
     "use strict";
     var opening_hours = '<br><br> <b> Operating hours </b> </br></br> ';
     if (location.opening_hours !== undefined) {
-        console.log(location.opening_hours);
         location.opening_hours.weekday_text.forEach(function (txt) {
             opening_hours += '<br>' + txt + '</br>';
         });
@@ -83,6 +81,7 @@ function hideImagePanel() {
     "use strict";
     try {
         info.innerHTML = '';
+        rating.setAttribute('class', 'rating-static rating-0');
         imagePanel.style.visibility = 'hidden';
     } catch (e) {
         console.log(e);
