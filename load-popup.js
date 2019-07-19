@@ -1,4 +1,4 @@
-/*global document, window, alert, console, require, google, gapi, moment, XMLHttpRequest*/
+/*global document, window, alert, console, require, google, gapi, moment, XMLHttpRequest, $*/
 /*jslint nomen: true */
 
 var createDeleteButton, initAutocomplete, changeSaveToUpdate;
@@ -55,6 +55,12 @@ function onLoad() {
         all_routes = JSON.parse(response);
     console.log(all_routes);
     createList(all_routes);
+    $(document).click(function (event) {
+        //if you click on anything except the modal itself or the "open modal" link, close the modal
+        if (!$(event.target).closest("#popup").length) {
+            window.location.href = '#';
+        }
+    });
 }
 
 // Prints error message
@@ -82,12 +88,12 @@ function checkIfLoggedIn() {
         alert("Signed in");
         document.getElementById("view").setAttribute("href", "#popup2");
         getPaths();
-
-    // Signed out: load sign-in popup
+        // Signed out: load sign-in popup
     } else {
         alert("Signed out");
         document.getElementById("view").setAttribute("href", "#popup1");
     }
+
     return false;
 }
 
