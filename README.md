@@ -50,6 +50,11 @@ To save path
  ctrl + s (Windows/Linux) | command + s (Mac)
 ```
 
+To download path
+```
+ ctrl + d (Windows/Linux) | command + d (Mac)
+```
+
 To view all existing paths
 ```
  ctrl + v (Windows/Linux) | command + v (Mac)
