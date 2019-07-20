@@ -103,9 +103,13 @@ function PlaceButton(controlDiv, map, location, listOfLocations) {
 
     // Setup the click event listeners: simply set the map to the chosen location.
     controlUI.addEventListener('click', function () {
-        console.log(location);
-        console.log(location.opening_hours.open_now);
-        map.setCenter(location.geometry.location);
+        try {
+            // For unsaved paths
+            map.setCenter(location.geometry.location);
+        } catch (e) {
+            // For loaded paths
+            map.setCenter(new google.maps.LatLng(location.lat, location.lng));
+        }
     });
 
 

@@ -1,9 +1,9 @@
 /*global document, window, alert, console, require, google, gapi, moment, $, setTimeout*/
 
-var GrowlNotification;
+var GrowlNotification, profile;
 
 // Welcome user notification
-function welcome(profile) {
+function welcome() {
     "use strict";
     console.log("Welcome notification loading...");
     GrowlNotification.notify({
@@ -24,7 +24,7 @@ function welcome(profile) {
 }
 
 // Sends user details to save-user
-function updateUserData(profile) {
+function updateUserData() {
     "use strict";
     if (profile) {
         $.ajax({
@@ -51,12 +51,12 @@ function onFailure(error) {
 // Successful google login, trigger welcome notification
 function onSuccess(googleUser) {
     "use strict";
-    var profile = googleUser.getBasicProfile();
+    profile = googleUser.getBasicProfile();
     window.location.href = '#';
     setTimeout(function () {
-        welcome(profile);
+        welcome();
     }, 1000);
-    updateUserData(profile);
+    updateUserData();
 }
 
 // Log user in

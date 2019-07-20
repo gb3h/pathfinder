@@ -11,7 +11,7 @@ var rating = document.getElementById('rating');
 function getImageUrl(location) {
     "use strict";
     var photo_url = '';
-    if (location.photos[0] !== undefined && image !== null) {
+    if (location.photos !== undefined && image !== null) {
         if (typeof location.photos[0] === "string") {
             photo_url = location.photos[0];
         } else {
@@ -41,7 +41,7 @@ function getRating(location) {
 // Get opening_hours of location
 function getOpeningHours(location) {
     "use strict";
-    var opening_hours = '<br><br> <b> Operating hours </b> </br></br> ';
+    var opening_hours = '<br><br> <b> Operating hours </b> </br> ';
     if (location.opening_hours !== undefined) {
         location.opening_hours.weekday_text.forEach(function (txt) {
             opening_hours += '<br>' + txt + '</br>';

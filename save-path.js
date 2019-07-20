@@ -2,7 +2,8 @@
 /*jslint nomen: true */
 var locations = [],
     GrowlNotification,
-    Mousetrap;
+    Mousetrap,
+    updateUserData;
 
 // Cleans location photos to give correct format
 function cleanPhotos(location) {
@@ -22,9 +23,11 @@ function cleanPhotos(location) {
                 photourls.push(photo.getUrl());
             }
         });
-        return photourls;
+    } else {
+        photourls.push("https://www.mygoyangi.com/wp-content/uploads/2016/11/download.jpeg");
 
     }
+    return photourls;
 }
 
 // Cleans location opening_hours to give correct format
@@ -46,6 +49,19 @@ function cleanOperatingHours(location) {
     return [null];
 }
 
+// Cleans location photos to give correct format
+function cleanLatLng(location) {
+    "use strict";
+    if (location.geometry !== undefined) {
+
+        // Incorrect format, reformatting before returning
+        return [location.geometry.location.lat(), location.geometry.location.lng()];
+    }
+
+    // Correct format, simply return
+    return [location.lat, location.lng];
+}
+
 // Cleans path to give correct format
 // Called whenever calculate button is clicked
 function cleanPath(listOfLocations) {
@@ -57,14 +73,17 @@ function cleanPath(listOfLocations) {
     listOfLocations.forEach(function (location) {
         locations.push({
             name: location.name,
+            lat: cleanLatLng(location)[0],
+            lng: cleanLatLng(location)[1],
             place_id: location.place_id,
             photos: cleanPhotos(location),
-            rating: location.rating,
+            rating: (location.rating === undefined ? 0 : location.rating),
             opening_hours: {
                 weekday_text: cleanOperatingHours(location)
             }
         });
     });
+    return listOfLocations;
 }
 
 // Notify users if the save/update has failed/ succeeded
@@ -98,8 +117,10 @@ function notify(process) {
 // Sends path location details to save-path
 function savePath() {
     "use strict";
+
     // Checks if user is signed in
     if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
+        updateUserData();
         $.ajax({
             type: "POST",
             data: {
@@ -145,4 +166,14 @@ function changeSaveToUpdate(node) {
     Mousetrap.bind('s', function () {
         savebutton.click();
     });
+}
+
+// Send details of location to generate
+function downloadPath() {
+    "use strict";
+    var array = JSON.stringify(locations);
+    console.log(array);
+    document.getElementById('idHidden').value = array;
+    document.getElementById('selectForm').submit();
+    notify("Download");
 }
