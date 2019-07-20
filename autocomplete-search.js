@@ -197,8 +197,8 @@ function initAutocomplete() {
     });
 
     // Nested functions in initAutocomplete below
-    function callCalculateAndDisplay(listOfLocations) {
-        return calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLocations);
+    function callCalculateAndDisplay(listOfLocations, mode) {
+        return calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLocations, mode);
     }
 
     // Update button function called when loading a saved path
@@ -218,7 +218,7 @@ function initAutocomplete() {
     }
 
     function callVerticesPanel(listOfLocations) {
-        verticesPanel(map, listOfLocations);
+        verticesPanel(map, result, listOfLocations);
     }
 
     function initCalculateButton(calculateButtonDiv, map, listOfLocations) {

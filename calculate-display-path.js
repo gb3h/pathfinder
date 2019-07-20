@@ -36,9 +36,9 @@ function CalculateButton(controlDiv, listOfLocations) {
 
     // Setup the click event listeners: simply set the map to the chosen location.
     controlUI.addEventListener('click', function () {
-        initAutocomplete.callCalculateAndDisplay(listOfLocations, true);
-        initAutocomplete.callVerticesPanel(listOfLocations);
         cleanPath(listOfLocations);
+        initAutocomplete.callCalculateAndDisplay(cleanPath(listOfLocations), true);
+        // initAutocomplete.callVerticesPanel(listOfLocations);
     });
 
     // Add keyboard shortcut 'ctrl+c or command+c' for calculate button
@@ -89,8 +89,8 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLo
     }, function (response, status) {
         if (status === 'OK') {
             initAutocomplete.setResult(JSON.parse(JSON.stringify(response)));
+            initAutocomplete.callVerticesPanel(listOfLocations);
             directionsDisplay.setDirections(response);
-
             var j,
                 route = response.routes[0],
                 slide = document.createElement('div'),
