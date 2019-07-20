@@ -262,5 +262,5 @@ app.post('/download-path', function (req, res) {
     });
 });
 
-app.listen(port || process.env.PORT);
-console.log('Working on ' + port);
+app.listen(process.env.PORT || 8002);
+console.log('Working...');
