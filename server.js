@@ -1,11 +1,16 @@
+/*global path, err*/
 /*jslint node:true */
 /*jslint nomen: true */
 
 var port = '8002';
 var express = require('express');
 var app = express();
+var ejs = require('./download-pdf/ejs');
+var pdf = require('./download-pdf/pdf');
 
+// app.set('view engine', 'ejs');
 app.use(express.static(__dirname));
+app.set("view engine", "ejs");
 
 //For parsing json files
 app.use(express.json()); // for parsing application/json
@@ -37,6 +42,14 @@ var locationSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    lat: {
+        type: Number,
+        required: true
+    },
+    lng: {
+        type: Number,
+        required: true
+    },
     place_id: {
         type: String,
         required: true
@@ -45,7 +58,10 @@ var locationSchema = new mongoose.Schema({
         type: [String],
         required: true
     },
-    rating: Number,
+    rating: {
+        type: Number,
+        default: null
+    },
     opening_hours: openingHoursSchema
 });
 
@@ -107,7 +123,7 @@ app.post('/save-user', function (req) {
 // Save path to mongodb, check for existing identical paths first
 app.post('/save-path', function (req, res) {
     "use strict";
-    console.log(req.body);
+    // console.log(req.body);
     var route = new Route({
         user_email: user.email,
         route: req.body.locations
@@ -195,6 +211,7 @@ app.post('/update-path', function (req) {
 // Find all paths saved by the user
 app.get('/paths', function (resp, res) {
     "use strict";
+    // console.log(resp);
     if (user.email !== undefined) {
         Route.find({
             user_email: user.email
@@ -209,6 +226,40 @@ app.get('/paths', function (resp, res) {
         console.log("No email");
         res.redirect("/");
     }
+});
+
+app.post('/download-path', function (req, res) {
+    "use strict";
+    var locations = req.body.selected;
+    locations = JSON.parse(locations);
+    console.log(locations);
+    // var coords = shortestRoute(names);
+    // var data1 = getShortest(coords, names);
+    // console.log(data1);
+    res.render('pdf.ejs', {
+        obj: locations,
+        tagline: "Optimal path for the destinations is as follows"
+    });
+    ejs.toHTML('views/pdf.ejs', {
+        obj: locations,
+        tagline: "Optimal path for the destinations is as follows"
+    }).then(function (html) {
+        var options = {
+                format: 'A4',
+                margin: '2cm'
+            },
+            output = 'pdf_dryrun2.pdf';
+        // var output = 'pdf_' + moment().format('YYYYMMDDHHmmSS') + '.pdf'
+
+        pdf.toPDF(html, options, output).then(function (response) {
+            console.log("PDF file successfully written");
+            console.log(response);
+        }, function (error) {
+            console.error(error);
+        });
+    }, function (error) {
+        console.error(error);
+    });
 });
 
 app.listen(port);

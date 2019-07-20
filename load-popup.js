@@ -36,6 +36,7 @@ function createList(all_routes) {
             node.onclick = function () {
                 initAutocomplete.callUpdateButtons(routex.route);
                 initAutocomplete.callCalculateAndDisplay(routex.route);
+                cleanPath(routex.route);
                 window.location.href = '#';
                 changeSaveToUpdate(node);
             };

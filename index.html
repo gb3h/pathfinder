@@ -28,6 +28,9 @@
     <!-- Save path button -->
     <button id="save-path"> <a id="save" onclick="savePath()">Save path</button>
 
+    <!-- Download path button -->
+    <button id="download-path"> <a id="download" onclick="downloadPath()">Download path</button>
+
     <!-- View existing paths button -->
     <button id="view-path"> <a id="view" href="#popup1" onclick=checkIfLoggedIn()> View existing path</button>
 
@@ -72,6 +75,10 @@
         <p id="info"></p>
       </div>
     </div>
+
+    <form action="/download-path" method="POST" id="selectForm">
+      <input type="hidden" name="selected" id="idHidden">
+    </form>
 
     <!-- Load javascript files -->
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
