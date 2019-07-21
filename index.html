@@ -3,43 +3,83 @@
 
   <head>
     <title> Pathfinder </title>
-    <meta name="viewport" content="initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <meta charset="utf-8">
     <!-- http://localhost:8003 -->
     <!-- <meta name="google-signin-client_id" content="814348781756-kpu2m8rvfnar9ivrof6v7f0keqls4n0o.apps.googleusercontent.com"> -->
+    <!-- https://path-finder-orbital.herokuapp.com/ -->
+    <!-- <meta name="google-signin-client_id" content="814348781756-e6kj9mrdr7im8dkit76ebt4plih06jsd.apps.googleusercontent.com"> -->
     <!-- http://localhost:8002 -->
     <meta name="google-signin-client_id" content="814348781756-at7u5j435edk45r985u1uitukt7sds5l.apps.googleusercontent.com">
-    <link rel="stylesheet" href="dist/light-theme.min.css">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" type="text/css" media="screen and (max-width: 770px)" href="dist/light-theme.min-mobile.css">
+    <link rel="stylesheet" type="text/css" media="screen and (min-width: 771px)" href="dist/light-theme.min.css">
+    <link rel="stylesheet" type="text/css" media="screen and (max-width: 770px)" href="index-mobile.css">
+    <link rel="stylesheet" type="text/css" media="screen and (min-width: 771px)" href="index.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
   </head>
 
   <body>
+    <div class="navbar">
+      <!-- User guide popup -->
+      <a href="#popup3"><i class="fas fa-question-circle"></i> Help</a>
+
+      <!-- Download path button -->
+      <a id="download" onclick="downloadPath()"><i class="fas fa-external-link-alt"></i> Export</a>
+
+      <!-- Save path button -->
+      <a id="save" onclick="savePath()" href="#"><i class="fas fa-check"></i> Save</a>
+
+      <div class="dropdown">
+        <!-- Profile tab -->
+        <a class="profile" onclick="toggleDropDown()"><i class="fa fa-fw fa-user"></i> Profile</a>
+
+        <div id="myDropdown" class="dropdown-content">
+          <!-- View existing paths button -->
+          <a id="view" href="#popup1" onclick=checkIfLoggedIn()>View saved</a>
+
+          <!-- Google sign-out button -->
+          <a id="sign-out" onclick="signOut();">Sign out</a>
+
+        </div>
+        <script>
+          /* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+          function toggleDropDown() {
+            document.getElementById("myDropdown").classList.toggle("show");
+          }
+
+          // Close the dropdown menu if the user clicks outside of it
+          window.onclick = function(event) {
+            if (!event.target.matches('.profile')) {
+              var dropdowns = document.getElementsByClassName("dropdown-content");
+              var i;
+              for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                  openDropdown.classList.remove('show');
+                }
+              }
+            }
+          }
+        </script>
+      </div>
+
+    </div>
 
     <!-- Page Title -->
-    <h1> <a href="#"><b> PATHFINDER </b> </a></h1>
+    <h2 id="page-title"> <b> PATHFINDER </b> </h2>
 
-    <!-- Google sign-out button -->
-    <button id="sign-out" onclick="signOut();">Sign out</button>
+    <!-- <button id="sign-out" onclick="signOut();">Sign out</button> -->
 
     <!-- New path button -->
-    <button id="new-path" onclick="document.location.reload(true);">New path</button>
+    <!-- <button id="new-path" onclick="document.location.reload(true);">New path</button> -->
 
-    <!-- Save path button -->
-    <button id="save-path"> <a id="save" onclick="savePath()">Save path</button>
-
-    <!-- Download path button -->
-    <button id="download-path"> <a id="download" onclick="downloadPath()">Download path</button>
-
-    <!-- View existing paths button -->
-    <button id="view-path"> <a id="view" href="#popup1" onclick=checkIfLoggedIn()> View existing path</button>
-
-    </script>
     <!-- Pop-up 1: requiring sign-in first if not signed in -->
     <div id="popup1" class="overlay">
       <div id="popup" class="popup1">
         <h2>Please sign in first</h2>
-        <a id="close1" class="close" href="">&times;</a>
+        <a id="close1" class="close" href="#">&times;</a>
         <div class="content">
           <p> Click on the button below to sign in to view your saved paths. </p>
         </div>
@@ -55,6 +95,61 @@
         <h2><a href="/paths">Please choose a route</a></h2>
         <a class="close" href="#">&times;</a>
         <ul id="myList"></ul>
+      </div>
+    </div>
+
+    <!-- Pop-up 2: to choose routes if signed in-->
+    <div id="popup3" class="overlay">
+      <div id="popup" class="popup2">
+        <h3>User guide</h3>
+        <a class="close" href="#">&times;</a>
+
+        <h2> To create a new path: </h2>
+        <p> Step 1: Input and add any locations you wish to visit in any order. </p>
+        <p> Step 2: Press calculate to display the most optimal path for your locations. </p>
+        <p> Step 3: Drag and reorder the location buttons as you like. </p>
+        <p> Step 4: Path complete! You can now choose to save your path or refresh the page to start anew. </p>
+        <p> Step 5: You may also want to export your path as a pdf.</p> <br />
+
+        <h2> To edit existing saved paths: </h2>
+        <p> Step 1: Click on profile. </p>
+        <p> Step 2: Click on path of choice to edit. </p>
+        <p> Step 3: Drag and reorder the location buttons and add new locations as you like. </p>
+        <p> Step 4: Path edit complete! You can now choose to update your path. </p>
+        <p> Step 5: You may also want to export your path as a pdf.</p> <br />
+
+        <h2>Keyboard shortcuts</h2>
+        <div class="content">
+          <table>
+            <col width="100" , row height="150">
+            <tr>
+              <td><b> a </b></td>
+              <td> Add location</td>
+            </tr>
+            <tr>
+              <td><b> Ctrl + C </b></td>
+              <td> Calculate path</td>
+            </tr>
+            <tr>
+              <td><b> Ctrl + S </b></td>
+              <td> Save new path </td>
+            </tr>
+            <tr>
+              <td><b> Ctrl + S </b></td>
+              <td> Update existing path </td>
+            </tr>
+            <tr>
+              <td><b> Ctrl + V</b></td>
+              <td> View all saved paths </td>
+            </tr>
+
+            <tr>
+              <td><b> Ctrl + D</b></td>
+              <td> Export path </td>
+            </tr>
+          </table>
+
+        </div>
       </div>
     </div>
 
@@ -79,6 +174,8 @@
     <form action="/download-path" method="POST" id="selectForm">
       <input type="hidden" name="selected" id="idHidden">
     </form>
+
+
 
     <!-- Load javascript files -->
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
@@ -105,3 +202,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
   </body>
+
+
+
+</html>

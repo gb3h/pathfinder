@@ -158,8 +158,8 @@ function updatePath(path_id, locations) {
 function changeSaveToUpdate(node) {
     "use strict";
     Mousetrap.unbind('s');
-    var savebutton = document.querySelector("#save-path");
-    savebutton.innerHTML = "Update Path";
+    var savebutton = document.querySelector("#save");
+    savebutton.innerHTML = "<i class='fas fa-check'></i> Update";
     savebutton.onclick = function () {
         updatePath(node.id, locations);
     };
