@@ -39,6 +39,7 @@ function CalculateButton(controlDiv, listOfLocations) {
         cleanPath(listOfLocations);
         initAutocomplete.callCalculateAndDisplay(cleanPath(listOfLocations), true);
         // initAutocomplete.callVerticesPanel(listOfLocations);
+        document.getElementById('image-panel').style.visibility = 'hidden';
     });
 
     // Add keyboard shortcut 'ctrl+c or command+c' for calculate button

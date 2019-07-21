@@ -61,8 +61,8 @@ function displayImagePanel(location) {
     "use strict";
     try {
         image.setAttribute('src', getImageUrl(location));
-        image.style.height = '200px';
-        image.style.width = '350px';
+        // image.style.height = '200px';
+        // image.style.width = '350px';
         if (info.innerHTML === '') {
             info.innerHTML += '<br><b>' + location.name + '</b></br>';
             info.innerHTML += getRating(location);

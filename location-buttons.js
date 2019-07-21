@@ -27,12 +27,11 @@ function AddLocation(controlDiv, map, wrappedLocObj, locations) {
     controlText.style.color = 'rgb(25,25,25)';
     controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
     controlText.style.fontSize = '16px';
-    controlText.style.lineHeight = '40px';
+    controlText.style.lineHeight = '36px';
     controlText.style.paddingLeft = '5px';
     controlText.style.paddingRight = '5px';
     controlText.innerHTML = 'Add'; //Add button to add location buttons by the side
     controlUI.appendChild(controlText);
-
     // Setup the click event listeners: on click we check if the temp obj is already in our list of locations.
     // If not, we add it to the list of locations and call UpdateButtons to add a button.
     controlUI.addEventListener('click', function () {
@@ -47,6 +46,7 @@ function AddLocation(controlDiv, map, wrappedLocObj, locations) {
         }
         locations.push(wrappedLocObj[0]);
         updateButtons(locations, map);
+        document.getElementById('directions-panel').style.visibility = "hidden";
     });
 
     // Add Keyboard shortcut 'a' to add location button
@@ -106,9 +106,12 @@ function PlaceButton(controlDiv, map, location, listOfLocations) {
         try {
             // For unsaved paths
             map.setCenter(location.geometry.location);
+
         } catch (e) {
             // For loaded paths
             map.setCenter(new google.maps.LatLng(location.lat, location.lng));
+        } finally {
+            displayImagePanel(location);
         }
     });
 
