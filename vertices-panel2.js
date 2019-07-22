@@ -1,6 +1,6 @@
 /*global document, window, alert, console, confirm, google, gapi, moment, $, setTimeout*/
 
-var Sortable, cleanPath, initAutocomplete;
+var Sortable, cleanPath, initAutocomplete, getImageUrl;
 
 function verticesPanel(map, resultObject, listOfLocations) {
     "use strict";
@@ -56,14 +56,16 @@ function verticesPanel(map, resultObject, listOfLocations) {
         // Ignore last location(destination) because it is the first location (origin)
         if (i !== newUnorderedLocations.length - 1) {
             var li = document.createElement("li"), // Create a <li> node
-                arrow = document.createElement("span");
+                arrow = document.createElement("span"),
+                photos = [];
+            photos.push(getImageUrl(location));
             li.setAttribute("class", "ui-state-default");
             li.innerHTML = location.name;
             li.setAttribute("place_id", location.place_id);
             li.setAttribute("rating", location.rating);
             li.setAttribute("lat", location.lat);
             li.setAttribute("lng", location.lng);
-            li.setAttribute("photos", JSON.stringify(location.photos));
+            li.setAttribute("photos", JSON.stringify(photos));
             arrow.setAttribute("class", "ui-icon ui-icon-arrowthick-2-n-s");
             li.appendChild(arrow);
             vp.appendChild(li);
