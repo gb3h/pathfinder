@@ -36,6 +36,7 @@ function createList(all_routes) {
             node.append(date);
             createDeleteButton(node);
             node.onclick = function () {
+                document.getElementById('directions-panel').style.visibility = "hidden";
                 initAutocomplete.callUpdateButtons(routex.route);
                 // initAutocomplete.callCalculateAndDisplay(routex.route);
                 cleanPath(routex.route);

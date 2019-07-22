@@ -319,16 +319,19 @@ h1, a {
 #image-panel {
   font-family: Tahoma, Arial, sans-serif;
   position: absolute;
-  left: 660px;
   top: 160px;
+  margin-left: 39%;
+  margin-right: 39%;
   z-index: 1;
   margin-top: 10px;
   background-color: #FFFFFF;
   padding: 10px;
   overflow: scroll;
   height: auto;
-  max-height: 900px;
-  width: auto;
+  overflow: scroll;
+  max-height: 75%;
+  max-width: 22%;
+  width: 320px;
   opacity: 0.9;
   visibility: hidden;
   border-radius: 1%;
@@ -336,15 +339,15 @@ h1, a {
 }
 
 #location-image {
-  height: 200px;
-  width: 350px;
+  height: 5%;
+  width: 99%;
 }
 
 /* Star rating */
 .rating-static {
   position: absolute;
-  top: 290px;
-  right: 200px;
+  margin-top: 25%;
+  right: 10%;
   width: 60px;
   height: 15px;
   display: block;
