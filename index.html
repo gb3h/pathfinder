@@ -17,10 +17,10 @@
     <meta name="google-signin-client_id" content="814348781756-ose3brjfikio60bhhnftr35bk7gnk1ca.apps.googleusercontent.com">
     <!-- Redirect http traffic to https -->
     <script>
-      var loc = window.location.href + '';
-      if (loc.indexOf('http://') == 0) {
-        window.location.href = loc.replace('http://', 'https://');
-      }
+      // var loc = window.location.href + '';
+      // if (loc.indexOf('http://') == 0) {
+      //   window.location.href = loc.replace('http://', 'https://');
+      // }
     </script>
     <!-- <meta http-equiv="refresh" content="0;URL=https://path-finder-orbital.herokuapp.com" /> -->
     <link rel="stylesheet" async type="text/css" media="screen and (max-width: 770px)" href="dist/light-theme.mobile.css">
@@ -199,9 +199,9 @@ toggle between hiding and showing the dropdown content */
     <script src="keyboard-shortcuts/mousetrap-global-bind.js"></script>
     <script src="keyboard-shortcuts/keyboard-shortcuts.js"></script>
     <script async src="dist/growl-notification.min.js"></script>
-    <script async type="text/javascript" src="main.min.js"></script>
+    <!-- <script async type="text/javascript" src="main.min.js"></script> -->
     <!-- <script type="text/javascript" src="location-buttons.js" async></script> -->
-    <!-- <script type="text/javascript" src="sign-in.js" async></script>
+    <script type="text/javascript" src="sign-in.js" async></script>
     <script type="text/javascript" src="sign-out.js" async defer></script>
     <script type="text/javascript" src="refresh.js" async></script>
     <script type="text/javascript" src="save-path.js" async></script>
@@ -211,7 +211,7 @@ toggle between hiding and showing the dropdown content */
     <script type="text/javascript" src="load-popup.js" async></script>
     <script type="text/javascript" src="calculate-display-path.js" async></script>
     <script type="text/javascript" src="vertices-panel2.js" async></script>
-    <script type="text/javascript" src="image-panel.js" async></script> -->
+    <script type="text/javascript" src="image-panel.js" async></script>
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQOCk29KyMP6NzMOgsS00V_XrOkjPgeJQ&libraries=places&callback=initAutocomplete" async defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" async defer></script>
