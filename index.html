@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <meta name="theme-color" content="#FFFFFF" />
     <meta charset="utf-8">
+    <!-- Make it a standalone app -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <!-- http://localhost:8003 -->
     <!-- <meta name="google-signin-client_id" content="814348781756-kpu2m8rvfnar9ivrof6v7f0keqls4n0o.apps.googleusercontent.com"> -->
     <!-- https://path-finder-orbital.herokuapp.com/ -->
@@ -15,6 +17,8 @@
     <!-- <meta name="google-signin-client_id" content="814348781756-at7u5j435edk45r985u1uitukt7sds5l.apps.googleusercontent.com"> -->
     <!-- http://path-finder-orbital.herokuapp.com/ -->
     <meta name="google-signin-client_id" content="814348781756-ose3brjfikio60bhhnftr35bk7gnk1ca.apps.googleusercontent.com">
+
+    <!-- <meta http-equiv="refresh" content="0;URL=https://path-finder-orbital.herokuapp.com" /> -->
     <!-- Redirect http traffic to https -->
     <script>
       // var loc = window.location.href + '';
@@ -22,7 +26,8 @@
       //   window.location.href = loc.replace('http://', 'https://');
       // }
     </script>
-    <!-- <meta http-equiv="refresh" content="0;URL=https://path-finder-orbital.herokuapp.com" /> -->
+    <!-- App icon for adding to home screen -->
+    <link rel="apple-touch-icon" href="app-apple-icon.png">
     <link rel="stylesheet" async type="text/css" media="screen and (max-width: 770px)" href="dist/light-theme.mobile.css">
     <link rel="stylesheet" async type="text/css" media="screen and (min-width: 771px)" href="dist/light-theme.css">
     <link rel="stylesheet" async type="text/css" media="screen and (max-width: 770px)" href="index-mobile.css">
@@ -194,7 +199,6 @@ toggle between hiding and showing the dropdown content */
 
     <script async src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script async src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script async src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="keyboard-shortcuts/mousetrap.min.js"></script>
     <script src="keyboard-shortcuts/mousetrap-global-bind.js"></script>
     <script src="keyboard-shortcuts/keyboard-shortcuts.js"></script>
@@ -203,7 +207,6 @@ toggle between hiding and showing the dropdown content */
     <!-- <script type="text/javascript" src="location-buttons.js" async></script> -->
     <script type="text/javascript" src="sign-in.js"></script>
     <script type="text/javascript" src="sign-out.js"></script>
-    <script type="text/javascript" src="refresh.js"></script>
     <script type="text/javascript" src="save-path.js"></script>
     <script type="text/javascript" src="delete-path.js"></script> ---
     <script type="text/javascript" src="location-buttons.js"></script>
