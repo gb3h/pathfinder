@@ -9,7 +9,7 @@ var ejs = require('./download-pdf/ejs');
 var pdf = require('./download-pdf/pdf');
 var compression = require('compression');
 // app.set('view engine', 'ejs');
-
+app.use(compression());
 app.use(express.static(__dirname));
 
 app.set("view engine", "ejs");
@@ -19,7 +19,7 @@ app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({
     extended: true
 })); // for parsing application/x-www-form-urlencoded
-app.use(compression());
+
 //Start Mongoose connection to db called pf_users
 var mongoose = require('mongoose');
 
