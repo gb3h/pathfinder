@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
   <head>
     <title> Pathfinder </title>
+    <meta name="Description" content="Pathfinder, your best travel buddy.">
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="theme-color" content="#FFFFFF" />
     <meta charset="utf-8">
     <!-- http://localhost:8003 -->
     <!-- <meta name="google-signin-client_id" content="814348781756-kpu2m8rvfnar9ivrof6v7f0keqls4n0o.apps.googleusercontent.com"> -->
@@ -13,13 +15,15 @@
     <!-- <meta name="google-signin-client_id" content="814348781756-at7u5j435edk45r985u1uitukt7sds5l.apps.googleusercontent.com"> -->
     <!-- http://path-finder-orbital.herokuapp.com/ -->
     <meta name="google-signin-client_id" content="814348781756-ose3brjfikio60bhhnftr35bk7gnk1ca.apps.googleusercontent.com">
-
-    <link rel="stylesheet" type="text/css" media="screen and (max-width: 770px)" href="dist/light-theme.min-mobile.css">
-    <link rel="stylesheet" type="text/css" media="screen and (min-width: 771px)" href="dist/light-theme.min.css">
-    <link rel="stylesheet" type="text/css" media="screen and (max-width: 770px)" href="index-mobile.css">
-    <link rel="stylesheet" type="text/css" media="screen and (min-width: 771px)" href="index.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- Redirect http traffic to https -->
+    <meta http-equiv="Refresh" content="0;URL=https://path-finder-orbital.herokuapp.com/" />
+    <link rel="stylesheet" async type="text/css" media="screen and (max-width: 770px)" href="dist/light-theme.mobile.css">
+    <link rel="stylesheet" async type="text/css" media="screen and (min-width: 771px)" href="dist/light-theme.css">
+    <link rel="stylesheet" async type="text/css" media="screen and (max-width: 770px)" href="index-mobile.css">
+    <link rel="stylesheet" async type="text/css" media="screen and (min-width: 771px)" href="index.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <link rel="manifest" href="/manifest.json">
   </head>
 
   <body>
@@ -80,7 +84,7 @@ toggle between hiding and showing the dropdown content */
 
     <!-- Pop-up 1: requiring sign-in first if not signed in -->
     <div id="popup1" class="overlay">
-      <div id="popup" class="popup1">
+      <div class="popup1">
         <h2>Please sign in first</h2>
         <a id="close1" class="close" href="#">&times;</a>
         <div class="content">
@@ -94,7 +98,7 @@ toggle between hiding and showing the dropdown content */
 
     <!-- Pop-up 2: to choose routes if signed in-->
     <div id="popup2" class="overlay">
-      <div id="popup" class="popup2">
+      <div class="popup2">
         <h2><a href="/paths">Please choose a route</a></h2>
         <a class="close" href="#">&times;</a>
         <ul id="myList"></ul>
@@ -103,7 +107,7 @@ toggle between hiding and showing the dropdown content */
 
     <!-- Pop-up 2: to choose routes if signed in-->
     <div id="popup3" class="overlay">
-      <div id="popup" class="popup2">
+      <div class="popup2">
         <h3>User guide</h3>
         <a class="close" href="#">&times;</a>
 
@@ -157,7 +161,7 @@ toggle between hiding and showing the dropdown content */
     </div>
 
     <!-- Search country button-->
-    <input name="search" id="pac-input" class="controls" type="text" placeholder="Enter a destination." autofocus>
+    <input name="search" id="pac-input" class="controls" type="text" placeholder="Enter a destination.">
 
     <!-- Integration with google maps -->
     <div id="map-container">
@@ -181,28 +185,30 @@ toggle between hiding and showing the dropdown content */
 
 
     <!-- Load javascript files -->
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-    <script src="https://dagrejs.github.io/project/graphlib/latest/graphlib.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="dist/growl-notification.min.js"></script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script async src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script async src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="keyboard-shortcuts/mousetrap.min.js"></script>
     <script src="keyboard-shortcuts/mousetrap-global-bind.js"></script>
     <script src="keyboard-shortcuts/keyboard-shortcuts.js"></script>
-    <script type="text/javascript" src="sign-in.js"></script>
-    <script type="text/javascript" src="sign-out.js"></script>
-    <script type="text/javascript" src="refresh.js"></script>
-    <script type="text/javascript" src="save-path.js"></script>
-    <script type="text/javascript" src="delete-path.js"></script>
-    <script type="text/javascript" src="location-buttons.js"></script>
-    <script type="text/javascript" src="autocomplete-search.js"></script>
-    <script type="text/javascript" src="load-popup.js"></script>
-    <script type="text/javascript" src="calculate-display-path.js"></script>
-    <script type="text/javascript" src="vertices-panel2.js"></script>
-    <script type="text/javascript" src="image-panel.js"></script>
+    <script async src="dist/growl-notification.min.js"></script>
+    <script async type="text/javascript" src="main.min.js"></script>
+    <!-- <script type="text/javascript" src="location-buttons.js" async></script> -->
+    <!-- <script type="text/javascript" src="sign-in.js" async></script>
+    <script type="text/javascript" src="sign-out.js" async defer></script>
+    <script type="text/javascript" src="refresh.js" async></script>
+    <script type="text/javascript" src="save-path.js" async></script>
+    <script type="text/javascript" src="delete-path.js" async></script> ---
+    <script type="text/javascript" src="location-buttons.js" async></script>
+    <script type="text/javascript" src="autocomplete-search.js" async></script>
+    <script type="text/javascript" src="load-popup.js" async></script>
+    <script type="text/javascript" src="calculate-display-path.js" async></script>
+    <script type="text/javascript" src="vertices-panel2.js" async></script>
+    <script type="text/javascript" src="image-panel.js" async></script> -->
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQOCk29KyMP6NzMOgsS00V_XrOkjPgeJQ&libraries=places&callback=initAutocomplete" async defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" async defer></script>
 
   </body>
 
