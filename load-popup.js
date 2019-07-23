@@ -84,7 +84,7 @@ function checkIfLoggedIn() {
     "use strict";
     $(document).click(function (event) {
         //if you click on anything except the modal itself or the "open modal" link, close the modal
-        if (!$(event.target).closest("#popup").length) {
+        if (!$(event.target).closest(".popup1" || ".popup2" || ".popup3").length) {
             window.location.href = '#';
         }
     });
