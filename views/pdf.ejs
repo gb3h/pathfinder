@@ -10,21 +10,27 @@
     <link rel="stylesheet" type='text/css' href="https://path-finder-orbital.herokuapp.com/download-pdf/pdf.css">
     <!-- For localhost -->
     <link rel="stylesheet" type='text/css' href="http://localhost:8002/download-pdf/pdf.css">
-
-
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
   </head>
 
   <body>
     <header>
       <div class="container">
+        <i id="home" class="fas fa-angle-left" onclick="window.history.back()"></i>
+        <i id="export" class="fas fa-angle-right" onclick="checkcanPrint()"></i>
+        <script>
+          function checkcanPrint() {
+            if (window.print) {
+              window.print();
+            } else {
+              alert("Sorry printing currently unavailable on mobile.");
+            }
+          }
+        </script>
         <h1 class="logo">
           PATH<span>FINDER</span>
         </h1>
-        <!--
-			<section class="social">
-				<a class="btn" href="https://www.github.com/itbruno">Github</a>
-				<a class="btn" href="https://www.twitter.com/_brunoweb">Twitter</a>
-			</section> -->
+
       </div>
     </header>
 
