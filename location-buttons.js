@@ -188,6 +188,12 @@ function updateButtons(listOfLocations, map) {
         placeButtonDiv = document.createElement('div');
         newButtons.appendChild(placeButtonDiv);
         placeButton = new PlaceButton(placeButtonDiv, map, listOfLocations[i], listOfLocations);
+        placeButtonDiv.style.width = 'auto';
+        placeButtonDiv.style.maxWidth = 100 / listOfLocations.length - 3 + '%';
+        placeButtonDiv.style.marginLeft = 3 / listOfLocations.length + '%';
+        placeButtonDiv.style.maxHeight = '65px';
+        placeButtonDiv.style.overflow = 'scroll';
+        placeButtonDiv.style.borderRadius = '3%';
         map.controls[google.maps.ControlPosition.TOP_CENTER].push(placeButtonDiv);
     }
 
