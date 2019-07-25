@@ -112,6 +112,7 @@ function initAutocomplete() {
         lastValidCenter = map.getCenter();
 
     directionsDisplay.setMap(map);
+    directionsDisplay.setPanel(document.getElementById('left-panel'));
     map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(input);
     map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(addLocationDiv);
 

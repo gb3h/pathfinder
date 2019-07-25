@@ -309,6 +309,22 @@ h1, a {
   visibility: hidden;
 }
 
+#left-panel {
+  font-family: Tahoma, Arial, sans-serif;
+  position: absolute;
+  left: 10px;
+  top: 80px;
+  z-index: 1;
+  margin-top: 35px;
+  background-color: #FFFFFF;
+  padding: 10px;
+  overflow: scroll;
+  max-height: 50%;
+  width: 300px;
+  opacity: 0.95;
+  visibility: hidden;
+}
+
 .handle {
   cursor: grab;
   font-family: "Font Awesome 5 Free";

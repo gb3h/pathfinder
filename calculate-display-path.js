@@ -99,7 +99,8 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLo
 
             // Make summary panel visible.
             summaryPanel.style.visibility = "visible";
-
+            var leftPanel = document.getElementById('left-panel');
+            leftPanel.style.visibility = "visible";
             // For each route, display summary information.
             for (j = 0; j < route.legs.length; j += 1) {
                 slide.className = "slide";
