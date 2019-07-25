@@ -17,16 +17,7 @@ html, body {
 }
 
 /* Page Title: Path Finder */
-h1 {
-  text-align: center;
-  font-family: 'Roboto', Arial, sans-serif;
-  height: 40px;
-  padding: 20px 0px;
-  margin: 2%;
-  letter-spacing: 1.5px;
-}
-
-h1, a {
+a {
   text-decoration: none;
   color: black;
   opacity: 0.9;
@@ -450,7 +441,7 @@ body {
   color: white;
   text-decoration: none;
   font-size: 12px;
-  width: 25%;
+  width: 20%;
   /* Four links of equal widths */
   text-align: center;
 
@@ -492,7 +483,7 @@ body {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 25%;
+  min-width: 20%;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   right: 0px;
@@ -524,21 +515,4 @@ body {
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {
   display: block;
-}
-
-/* Page content */
-.content {
-  padding: 16px;
-}
-
-/* The sticky class is added to the navbar with JS when it reaches its scroll position */
-.sticky {
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-
-/* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
-.sticky+.content {
-  padding-top: 60px;
 }
