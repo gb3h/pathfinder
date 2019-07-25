@@ -1,4 +1,4 @@
-/*global document, window, alert, console, require, google, $*/
+/*global document, window, alert, console, require, google, $, confirm*/
 /*jslint nomen: true */
 
 // Sends path details to delete-path
@@ -13,6 +13,16 @@ function deletePath(node) {
     });
 }
 
+//Confirms deletion
+function confirmDeletion(node, removeButton) {
+    "use strict";
+    if (confirm("Warning. This will delete the path forever.")) {
+        deletePath(node);
+        node.removeChild(removeButton);
+        node.remove();
+    }
+}
+
 // Creates delete button on loaded paths page for each path
 function createDeleteButton(node) {
     "use strict";
@@ -20,9 +30,7 @@ function createDeleteButton(node) {
     removeButton.appendChild(document.createTextNode("delete"));
     node.appendChild(removeButton);
     removeButton.onclick = function (e) {
-        deletePath(node);
+        confirmDeletion(node, removeButton);
         e.stopPropagation();
-        node.removeChild(removeButton);
-        node.remove();
     };
 }
