@@ -62,9 +62,22 @@ header {
   text-align: center;
 }
 
+header #home {
+  font-size: 18px;
+  float: left;
+  color: white;
+}
+
+header #export {
+  font-size: 15px;
+  float: right;
+  margin-bottom: auto;
+  color: white;
+}
+
 header .logo {
   color: #ee4d4d;
-  /*float: left;*/
+  float: center;
   font-family: "Dosis", arial, tahoma, verdana;
   font-size: 35px;
   font-weight: 500;
@@ -73,16 +86,6 @@ header .logo {
 header .logo>span {
   color: #f7aaaa;
   font-weight: 300;
-}
-
-header .social {
-  float: right;
-}
-
-header .social .btn {
-  font-family: "Dosis";
-  font-size: 14px;
-  margin: 10px 5px;
 }
 
 #timeline {
