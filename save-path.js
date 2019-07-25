@@ -73,6 +73,7 @@ function cleanPath(listOfLocations) {
     listOfLocations.forEach(function (location) {
         locations.push({
             name: location.name,
+            formatted_address: location.formatted_address,
             lat: cleanLatLng(location)[0],
             lng: cleanLatLng(location)[1],
             place_id: location.place_id,
@@ -141,17 +142,22 @@ function savePath() {
 // Sends path location details to update-path
 function updatePath(path_id, locations) {
     "use strict";
-    $.ajax({
-        type: "POST",
-        data: {
-            _id: path_id,
-            locations: locations
-        },
-        url: "update-path"
-    }).done(function () {
-        window.location.href = '#';
-    });
-    notify("Update");
+    try {
+        updateUserData();
+        $.ajax({
+            type: "POST",
+            data: {
+                _id: path_id,
+                locations: locations
+            },
+            url: "update-path"
+        }).done(function () {
+            window.location.href = '#';
+        });
+        notify("Update");
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 // Changes save path button to update button

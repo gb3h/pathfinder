@@ -44,6 +44,10 @@ var locationSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    formatted_address: {
+        type: String,
+        required: true
+    },
     lat: {
         type: Number,
         required: true

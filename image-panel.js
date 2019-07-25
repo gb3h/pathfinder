@@ -44,7 +44,11 @@ function getOpeningHours(location) {
     var opening_hours = '<br><br> <b> Operating hours </b> </br> ';
     if (location.opening_hours !== undefined) {
         location.opening_hours.weekday_text.forEach(function (txt) {
-            opening_hours += '<br>' + txt + '</br>';
+            if (txt == "") {
+                opening_hours += '<br> No opening hours available </br>';
+            } else {
+                opening_hours += '<br>' + txt + '</br>';
+            }
         });
     } else {
         opening_hours += '<br> No opening hours available </br>';

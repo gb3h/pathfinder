@@ -29,6 +29,7 @@ function verticesPanel(map, resultObject, listOfLocations) {
                     newOrderedLocations.push({
                         name: listElements[i].innerText,
                         place_id: listElements[i].getAttribute('place_id'),
+                        formatted_address: listElements[i].getAttribute('formatted_address'),
                         rating: listElements[i].getAttribute('rating'),
                         lat: listElements[i].getAttribute('lat'),
                         lng: listElements[i].getAttribute('lng'),
@@ -43,9 +44,9 @@ function verticesPanel(map, resultObject, listOfLocations) {
     vp.setAttribute('id', 'sortable');
 
     // Create new unorderedlocations .
-    resultObject.geocoded_waypoints.forEach(function (obj) {
+    resultObject.routes[0].legs.forEach(function (obj) {
         listOfLocations.forEach(function (location) {
-            if (location.place_id === obj.place_id) {
+            if (location.formatted_address === obj.start_address) {
                 newUnorderedLocations.push(location);
             }
         });
@@ -54,13 +55,14 @@ function verticesPanel(map, resultObject, listOfLocations) {
     // Create sortable vertices panel.
     newUnorderedLocations.forEach(function (location, i) {
         // Ignore last location(destination) because it is the first location (origin)
-        if (i !== newUnorderedLocations.length - 1) {
+        if ((i !== newUnorderedLocations.length) || (i === 0)) {
             var li = document.createElement("li"), // Create a <li> node
                 arrow = document.createElement("span"),
                 photos = [];
             photos.push(getImageUrl(location));
             li.setAttribute("class", "ui-state-default");
             li.innerHTML = location.name;
+            li.setAttribute("formatted_address", location.formatted_address);
             li.setAttribute("place_id", location.place_id);
             li.setAttribute("rating", location.rating);
             li.setAttribute("lat", location.lat);

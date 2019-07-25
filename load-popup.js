@@ -39,7 +39,7 @@ function createList(all_routes) {
                 document.getElementById('directions-panel').style.visibility = "hidden";
                 initAutocomplete.callUpdateButtons(routex.route);
                 // initAutocomplete.callCalculateAndDisplay(routex.route);
-                cleanPath(routex.route);
+                // cleanPath(routex.route);
                 window.location.href = '#';
                 changeSaveToUpdate(node);
             };
@@ -90,12 +90,10 @@ function checkIfLoggedIn() {
     });
     // Signed in: load view paths popup
     if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
-        alert("Signed in");
         document.getElementById("view").setAttribute("href", "#popup2");
         getPaths();
         // Signed out: load sign-in popup
     } else {
-        alert("Signed out");
         document.getElementById("view").setAttribute("href", "#popup1");
     }
 
