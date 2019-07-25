@@ -231,9 +231,20 @@ function initAutocomplete() {
         console.log(result);
     }
 
+    function clearMap() {
+        directionsDisplay.setMap(null);
+
+    }
+
+    function resetMap() {
+        directionsDisplay.setMap(map);
+
+    }
     initAutocomplete.callCalculateAndDisplay = callCalculateAndDisplay;
     initAutocomplete.callUpdateButtons = callUpdateButtons;
     initAutocomplete.callVerticesPanel = callVerticesPanel;
     initAutocomplete.initCalculateButton = initCalculateButton;
     initAutocomplete.setResult = setResult;
+    initAutocomplete.clearMap = clearMap;
+    initAutocomplete.resetMap = resetMap;
 }

@@ -36,12 +36,17 @@ function createList(all_routes) {
             node.append(date);
             createDeleteButton(node);
             node.onclick = function () {
+                //Clear map from previous calculations
+                initAutocomplete.clearMap();
+
                 document.getElementById('directions-panel').style.visibility = "hidden";
                 initAutocomplete.callUpdateButtons(routex.route);
                 // initAutocomplete.callCalculateAndDisplay(routex.route);
                 // cleanPath(routex.route);
                 window.location.href = '#';
                 changeSaveToUpdate(node);
+                cleanPath([]);
+
             };
 
             // Append route node <li> to <ul> with id="myList"

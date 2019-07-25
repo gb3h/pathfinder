@@ -89,6 +89,8 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLo
         travelMode: 'DRIVING'
     }, function (response, status) {
         if (status === 'OK') {
+            //Set map again after previous clearing
+            initAutocomplete.resetMap();
             initAutocomplete.setResult(JSON.parse(JSON.stringify(response)));
             initAutocomplete.callVerticesPanel(listOfLocations);
             directionsDisplay.setDirections(response);
