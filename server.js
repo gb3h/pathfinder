@@ -95,9 +95,22 @@ var routeSchema = new mongoose.Schema({
     }
 });
 
+// Create Feedback Schema
+var feedbackSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    feedback: {
+        type: String,
+        required: true
+    }
+});
+
 // Create collections named users and routes
 var User = mongoose.model("User", userSchema);
 var Route = mongoose.model("Route", routeSchema);
+var Feedback = mongoose.model("Feedback", feedbackSchema);
 var user = "";
 
 // Save user to mongodb, check if already registered first
@@ -266,6 +279,16 @@ app.post('/download-path', function (req, res) {
     }, function (error) {
         console.error(error);
     });
+});
+
+app.post('/add-bug', function (req, res) {
+    console.log(req.body.name);
+    console.log(req.body.bug);
+    var feedback = new Feedback({
+        name: req.body.name,
+        feedback: req.body.bug
+    });
+    feedback.save();
 });
 
 app.listen(process.env.PORT || 8002);

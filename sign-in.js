@@ -76,3 +76,25 @@ function renderButton() {
         console.log(e);
     }
 }
+
+function notifyFeedback() {
+    "use strict";
+    console.log("Feedback notification loading...");
+    GrowlNotification.notify({
+        title: "Thank You for your feedback",
+        description: 'We will visit the bug soon!',
+        image: {
+            visible: true,
+            customImage: ''
+        },
+        closeTimeout: 3000,
+        type: 'warning',
+        closeWith: ['click', 'button'],
+        animationDuration: 0.5,
+        position: 'top-center'
+    });
+    console.log("Feedback noti complete!!");
+    document.getElementById("submitfeedback").onclick = function () {
+        window.location.href = "#";
+    };
+}

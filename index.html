@@ -44,8 +44,7 @@
   <body>
     <div class="navbar">
       <!-- User guide popup -->
-      <a href="#popup3"><i class="fas fa-question-circle"></i> Help</a>
-
+      <a id="help" href="#popup3"><i class="fas fa-question-circle"></i> Help</a>
 
       <!-- New path button -->
       <a id="new" onclick="window.location.reload();"><i class="fas fa-times"></i> New</a>
@@ -53,7 +52,6 @@
       <a id="save" onclick="savePath()" href="#"><i class="fas fa-check"></i> Save</a>
       <!-- Download path button -->
       <a id="download" onclick="downloadPath()"><i class="fas fa-external-link-alt"></i> Export</a>
-
 
       <div class="dropdown">
         <!-- Profile tab -->
@@ -128,14 +126,12 @@
     <!-- Pop-up 3: User Guide-->
     <div id="popup3" class="overlay" onclick="window.location.href = '#'">
       <div class=" popup2">
+        <a id="close1" class="close" href="#">&times;</a>
         <h2>User guide</h2>
         <p style="color: #2F4F4F; font-size: 15px; line-height: 1.5;">
           <b> Press 'Calculate!' to let us know when your path is confirmed. Only then can saving/ updating/ exporting work. </b>
         </p>
-
-
-        <a id="close1" class="close" href="#">&times;</a>
-
+        <b><a style="color: #4682B4" id="problem" href="#popup4"> Facing problems? Click here to feedback. <br /></a></b>
         <br />
         <h2> To create a new path</h2>
         <ol style="line-height: 1.5;">
@@ -175,7 +171,7 @@
           <li>
             Drag and reorder the location buttons as you like.</li><br />
           <li>
-            Path complete! <mark><i class="fas fa-check"></i> Update </mark> your path or start afresh by pressing <mark><i class="fas fa-times"></i> New </mark>. </li>
+            Path complete! <mark><i class="fas fa-check"></i> Update </mark> your path or start afresh by pressing <mark><i class="fas fa-times"></i> New </mark></li>
           <br />
           <li>
 
@@ -225,8 +221,62 @@
       </div>
     </div>
 
+
+    <!-- Pop-up 4: Problems, Report bug  -->
+    <div id="popup4" class="overlay">
+      <div class=" popup4">
+        <div onclick="window.location.href = '#'">
+          <a class="close" href="#">&times;</a>
+          <h2>Problems</h2>
+          <h3>[Process] failed, no locations entered. Please try again.</h3>
+          <p>
+            Press Calculate before other actions. This is for us to know when your locations are fixed and confirmed.
+          </p>
+          <h3>My location buttons are not appearing.</h3>
+          <p>
+            Please clear your browser cache. For Mac users, you can press command + shift + delete to do so. <a href="https://www.pcmag.com/article/333441/how-to-clear-your-cache-on-any-browser">For others, click me to find out how to clear your
+              browser
+              cache.</a>
+          </p>
+          <h3>My path is not listed under 'View paths' even after saving.</h3>
+          <p>
+            Please refresh the page before viewing. You can do so by pressing <mark><i class="fas fa-times"></i> New </mark>.
+          </p>
+          <h3>Facing a problem that is not covered here?</h3>
+          <p>
+            Please fill in the form below to report the bug.
+          </p>
+        </div>
+
+        <div class="container">
+          <form action="/add-bug" method="POST" id="addBug">
+            <div class="row">
+              <div class="col-25">
+                <label for="name">Name</label>
+              </div>
+              <div class="col-75">
+                <input type="text" id="name" name="name" placeholder="Enter your name..." onfocus="this.value=''" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="bug">Problem</label>
+              </div>
+              <div class="col-75">
+                <textarea id="bug" name="bug" placeholder="Write something.." onfocus="this.value=''" style="height:120px" required></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <input id="submitfeedback" type="submit" value="Submit" onclick=" window.location.href = '#';setTimeout(function(){
+                notifyFeedback();}, 1000);">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <!-- Search country button-->
-    <input name="search" id="pac-input" class="controls" type="text" placeholder="Enter a destination.">
+    <input name="search" id="pac-input" class="controls" onfocus="this.value=''" type="text" placeholder="Enter a destination.">
 
     <!-- Integration with google maps -->
     <div id="map-container">
