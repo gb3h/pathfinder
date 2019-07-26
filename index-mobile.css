@@ -250,6 +250,7 @@ a {
   border-radius: 5px;
   right: 2%;
   bottom: 16%;
+  -webkit-appearance: none;
 }
 
 .popup2 mark, .popup4 mark {
@@ -699,6 +700,7 @@ input[type=submit] {
   margin-top: 5px;
   font-size: 12px;
   width: 80%;
+  -webkit-appearance: none;
 }
 
 /* Style the container */

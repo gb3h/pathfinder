@@ -239,6 +239,8 @@ a {
   font-size: 14px;
   position: absolute;
   font-family: 'Roboto', Arial, sans-serif;
+  background-color: white;
+  border-radius: 5px;
   right: 2%;
   bottom: 22%;
 }
@@ -580,6 +582,7 @@ input[type=submit] {
   margin-top: 5px;
   font-size: 12px;
   width: 80%;
+  -webkit-appearance: none;
 }
 
 /* Style the container */
