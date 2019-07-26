@@ -18,7 +18,7 @@ function AddLocation(controlDiv, map, wrappedLocObj, locations) {
     controlUI.style.borderRadius = '0px 15px 15px 0px';
     controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
     controlUI.style.cursor = 'pointer';
-    controlUI.style.marginBottom = '50px';
+    controlUI.style.marginBottom = '40px';
     controlUI.style.textAlign = 'center';
     controlUI.title = 'Click to add selected place';
     controlDiv.appendChild(controlUI);
