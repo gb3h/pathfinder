@@ -18,7 +18,7 @@ function AddLocation(controlDiv, map, wrappedLocObj, locations) {
     controlUI.style.borderRadius = '0px 15px 15px 0px';
     controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
     controlUI.style.cursor = 'pointer';
-    controlUI.style.marginBottom = '40px';
+    controlUI.style.marginBottom = '50px';
     controlUI.style.textAlign = 'center';
     controlUI.title = 'Click to add selected place';
     controlDiv.appendChild(controlUI);
@@ -46,7 +46,8 @@ function AddLocation(controlDiv, map, wrappedLocObj, locations) {
         }
         locations.push(wrappedLocObj[0]);
         updateButtons(locations, map);
-        document.getElementById('directions-panel').style.visibility = "hidden";
+        document.getElementById('toggleOff').click();
+        document.getElementById('toggleOn').style.visibility = 'hidden';
     });
 
     // Add Keyboard shortcut 'a' to add location button
@@ -182,7 +183,7 @@ function updateButtons(listOfLocations, map) {
         newButtons = document.createElement('NavButtons'),
         calculateButtons = document.createElement('CalculateButton'),
         calculateButtonDiv = document.createElement('div'),
-        calculateButton = new CalculateButton(calculateButtonDiv, listOfLocations);
+        calculateButton = new CalculateButton(calculateButtonDiv, listOfLocations, map);
 
     for (i = 0; i < listOfLocations.length; i += 1) {
         placeButtonDiv = document.createElement('div');

@@ -1,11 +1,11 @@
 /*global document, window, alert, console, require, google*/
 
-var initAutocomplete, cleanPath, Mousetrap;
+var initAutocomplete, cleanPath, Mousetrap, EditButton;
 /* This creates the calculate button to calculate route segments, and
 display paths.
 Used in: initAutocomplete
 */
-function CalculateButton(controlDiv, listOfLocations) {
+function CalculateButton(controlDiv, listOfLocations, map) {
 
     "use strict";
 
@@ -15,13 +15,13 @@ function CalculateButton(controlDiv, listOfLocations) {
     // Set CSS for the button background.
     controlUI.style.backgroundColor = '#fff';
     controlUI.style.border = '2px solid #fff';
-    controlUI.style.borderRadius = '3px';
+    controlUI.style.borderRadius = '4px';
     controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
     controlUI.style.cursor = 'pointer';
-    controlUI.style.marginTop = '-3px';
-    controlUI.style.marginBottom = '3px';
+    controlUI.style.marginTop = '-2px';
+    controlUI.style.marginBottom = '2px';
     controlUI.style.textAlign = 'center';
-    controlUI.title = 'Click to view place';
+    controlUI.title = 'Click to calculate';
     controlDiv.appendChild(controlUI);
 
     // Set CSS for the control interior.
@@ -40,6 +40,13 @@ function CalculateButton(controlDiv, listOfLocations) {
         initAutocomplete.callCalculateAndDisplay(cleanPath(listOfLocations), true);
         // initAutocomplete.callVerticesPanel(listOfLocations);
         document.getElementById('image-panel').style.visibility = 'hidden';
+        var editButtons = document.createElement('EditButton'),
+            editButtonDiv = document.createElement('div'),
+            editButton = new EditButton(editButtonDiv, listOfLocations);
+
+        editButtons.appendChild(editButtonDiv);
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].removeAt(0);
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(editButtonDiv);
     });
 
     // Add keyboard shortcut 'ctrl+c or command+c' for calculate button
@@ -125,7 +132,55 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLo
         }
     });
 }
+/* This creates the edit button to calculate route segments, and
+display paths.
+Used in: initAutocomplete
+*/
+function EditButton(controlDiv, listOfLocations) {
 
+    "use strict";
+
+    var controlUI = document.createElement('div'),
+        controlText = document.createElement('div');
+
+    // Set CSS for the button background.
+    controlUI.style.backgroundColor = '#fff';
+    controlUI.style.border = '2px solid #fff';
+    controlUI.style.borderRadius = '3px';
+    controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+    controlUI.style.cursor = 'pointer';
+    controlUI.style.marginTop = '-3px';
+    controlUI.style.marginBottom = '3px';
+    controlUI.style.textAlign = 'center';
+    controlUI.title = 'Click to edit path';
+    controlDiv.appendChild(controlUI);
+
+    // Set CSS for the control interior.
+    controlText.style.color = 'rgb(25,25,25)';
+    controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+    controlText.style.fontSize = '16px';
+    controlText.style.lineHeight = '38px';
+    controlText.style.paddingLeft = '10px';
+    controlText.style.paddingRight = '8px';
+    controlText.innerHTML = 'Edit!';
+    controlUI.appendChild(controlText);
+
+    // Setup the click event listeners: simply set the map to the chosen location.
+    controlUI.addEventListener('click', function () {
+
+        initAutocomplete.clearMap();
+        initAutocomplete.callUpdateButtons(listOfLocations);
+        document.getElementById('toggleOff').click();
+        document.getElementById('toggleOn').style.visibility = 'hidden';
+        cleanPath([]);
+
+    });
+
+    // Add keyboard shortcut 'ctrl+c or command+c' for calculate button
+    Mousetrap.bindGlobal('mod+e', function () {
+        controlUI.click();
+    });
+}
 // function generateGraph(listOfLocations, directionsService) {
 //   var matrix = [];
 //   const graph = new graphlib.Graph();
