@@ -113,6 +113,9 @@ function initAutocomplete() {
 
     directionsDisplay.setMap(map);
     directionsDisplay.setPanel(document.getElementById('left-panel'));
+    input.addEventListener('click', function () {
+        input.scrollIntoView();
+    });
     map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(input);
     map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(addLocationDiv);
 
