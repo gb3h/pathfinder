@@ -122,16 +122,22 @@ function savePath() {
     // Checks if user is signed in
     if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
         updateUserData();
-        $.ajax({
-            type: "POST",
-            data: {
-                locations: locations
-            },
-            url: "save-path"
-        }).done(function () {
-            window.location.href = '#';
-        });
         notify("Save");
+        if (locations === undefined || locations.length <= 0) {
+            console.log("No locations entered");
+        } else {
+            $.ajax({
+                type: "POST",
+                data: {
+                    locations: locations
+                },
+                url: "save-path"
+            }).done(function () {
+                window.location.href = '#';
+            });
+        }
+
+
     } else {
 
         // Not signed in, trigger sign-in popup
@@ -144,17 +150,21 @@ function updatePath(path_id, locations) {
     "use strict";
     try {
         updateUserData();
-        $.ajax({
-            type: "POST",
-            data: {
-                _id: path_id,
-                locations: locations
-            },
-            url: "update-path"
-        }).done(function () {
-            window.location.href = '#';
-        });
         notify("Update");
+        if (locations === undefined || locations.length <= 0) {
+            console.log("No locations entered");
+        } else {
+            $.ajax({
+                type: "POST",
+                data: {
+                    _id: path_id,
+                    locations: locations
+                },
+                url: "update-path"
+            }).done(function () {
+                window.location.href = '#';
+            });
+        }
     } catch (e) {
         console.log(e);
     }
@@ -179,7 +189,11 @@ function downloadPath() {
     "use strict";
     var array = JSON.stringify(locations);
     console.log(array);
-    document.getElementById('idHidden').value = array;
-    document.getElementById('selectForm').submit();
     notify("Download");
+    if (locations === undefined || locations.length <= 0) {
+        console.log("No locations entered");
+    } else {
+        document.getElementById('idHidden').value = array;
+        document.getElementById('selectForm').submit();
+    }
 }
