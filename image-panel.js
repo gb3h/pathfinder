@@ -73,6 +73,9 @@ function displayImagePanel(location) {
             info.innerHTML += getOpeningHours(location);
         }
         imagePanel.style.visibility = 'visible';
+        imagePanel.onclick = (function () {
+            hideImagePanel();
+        });
     } catch (e) {
         console.log(e);
     }

@@ -26,10 +26,13 @@
         window.location.href = loc.replace('http://', 'https://');
       } -->
     </script>
+    <link rel="preconnect" href="https://accounts.google.com">
+    <link rel="preconnect" href="https://apis.google.com">
+
     <!-- App icon for adding to home screen -->
     <link rel="apple-touch-icon" href="app-apple-icon.png">
     <link rel="stylesheet" async type="text/css" media="screen and (max-width: 770px)" href="dist/light-theme.mobile.css">
-    <link rel="stylesheet" async type="text/css" media="screen and (min-width: 771px)" href="dist/light-theme.css">
+    <link rel="stylesheet" async type="text/css" media="screen and (min-width: 771px)" href="dist/light-theme.min.css">
     <link rel="stylesheet" async type="text/css" media="screen and (max-width: 770px)" href="index-mobile.css">
     <link rel="stylesheet" async type="text/css" media="screen and (min-width: 771px)" href="index.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -90,11 +93,13 @@
 
     <!-- Page Title -->
     <h2 id="page-title"> <b> PATHFINDER </b> </h2>
+    <a id="toggleOff"
+      onclick="document.getElementById('directions-panel').style.visibility = 'hidden' ; document.getElementById('left-panel').style.visibility = 'hidden'; document.getElementsByClassName('slideshow-container')[0].style.visibility = 'hidden'; document.getElementById('toggleOn').style.visibility = 'visible' ; document.getElementById('toggleOff').style.visibility = 'hidden' ;"><i
+        class="far fa-eye-slash"></i> </a>
+    <a id="toggleOn"
+      onclick="document.getElementById('directions-panel').style.visibility = 'visible'; document.getElementById('left-panel').style.visibility = 'visible';document.getElementsByClassName('slideshow-container')[0].style.visibility = 'visible'; document.getElementById('toggleOn').style.visibility = 'hidden' ; document.getElementById('toggleOff').style.visibility = 'visible' ;"><i
+        class="far fa-eye"></i> </a>
 
-    <!-- <button id="sign-out" onclick="signOut();">Sign out</button> -->
-
-    <!-- New path button -->
-    <!-- <button id="new-path" onclick="document.location.reload(true);">New path</button> -->
 
     <!-- Pop-up 1: requiring sign-in first if not signed in -->
     <div id="popup1" class="overlay">
@@ -122,7 +127,7 @@
     <!-- Pop-up 2: to choose routes if signed in-->
     <div id="popup3" class="overlay">
       <div class="popup2">
-        <h3>User guide</h3>
+        <h2>User guide</h2>
         <a class="close" href="#">&times;</a>
 
         <h2> To create a new path: </h2>
@@ -181,9 +186,8 @@
     <div id="map-container">
       <div id="map"></div>
 
-      <!-- Directions Panel -->
-      <div class=sortable id="directions-panel"></div>
-      <div id="left-panel"></div>
+      <!-- Loading icon -->
+      <div class="se-pre-con"></div>
 
       <!-- Image Panel -->
       <div id="image-panel">
@@ -191,7 +195,49 @@
         <span id="rating" class="rating-static rating-0"></span>
         <p id="info"></p>
       </div>
+
+      <div class="slideshow-container">
+
+        <!-- Directions panel slideshow -->
+        <div class="mySlides" id="directions-panel"></div>
+        <div class="mySlides" id="left-panel"></div>
+
+        <!-- Next/prev buttons -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+      </div>
+
+
+      <script>
+        var slideIndex = 1;
+        var slides = document.getElementsByClassName("mySlides");
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+          for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+          }
+          showSlides(slideIndex += n);
+
+        }
+
+        function currentSlide(n) {
+          showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+          var i;
+          if (n > slides.length) {
+            slideIndex = 1
+          }
+          if (n < 1) {
+            slideIndex = slides.length
+          }
+          slides[slideIndex - 1].style.display = "block";
+        }
+      </script>
     </div>
+
 
     <form action="/download-path" method="POST" id="selectForm">
       <input type="hidden" name="selected" id="idHidden">
@@ -203,6 +249,9 @@
 
     <script async src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script async src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+
     <script src="keyboard-shortcuts/mousetrap.min.js"></script>
     <script src="keyboard-shortcuts/mousetrap-global-bind.js"></script>
     <script src="keyboard-shortcuts/keyboard-shortcuts.js"></script>

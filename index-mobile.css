@@ -166,10 +166,10 @@ a {
 
 .popup1 .close, .popup2 .close {
   position: absolute;
-  top: 15px;
+  top: 13px;
   right: 20px;
   transition: all 200ms;
-  font-size: 20px;
+  font-size: 23px;
   font-weight: bold;
   text-decoration: none;
   color: #333;
@@ -246,7 +246,7 @@ a {
   background-color: white;
   border-radius: 5px;
   right: 2%;
-  bottom: 22%;
+  bottom: 16%;
 }
 
 /* Overlay customisations */
@@ -291,21 +291,72 @@ a {
 /* End of sortable locations panel: drag and drop */
 
 /* Vertices panel: with route segments */
-#directions-panel {
+/* #directions-panel {
   font-family: Tahoma, Arial, sans-serif;
   position: absolute;
-  top: 222px;
+  bottom: 15%;
   margin-left: 10%;
   margin-right: 10%;
   z-index: 0;
   background-color: #FFFFFF;
-  /* background-color: black; */
+
+border-radius: 1%;
+padding: 10px;
+overflow: scroll;
+max-height: 45%;
+max-width: 80%;
+opacity: 0.85;
+visibility: hidden;
+} */
+
+#directions-panel {
+  font-family: Tahoma, Arial, sans-serif;
+  position: relative;
+  /* right: 10px;
+  top: 80px; */
+  z-index: 1;
+  /* margin-top: 35px; */
+  background-color: #FFFFFF;
   padding: 10px;
   overflow: scroll;
   max-height: 50%;
-  max-width: 80%;
+  width: 100%;
   opacity: 0.85;
   visibility: hidden;
+  display: block;
+}
+
+
+/* #left-panel {
+  font-family: Tahoma, Arial, sans-serif;
+  position: absolute;
+  left: 10px;
+  top: 80px;
+  z-index: 1;
+  margin-top: 35px;
+  background-color: #FFFFFF;
+  padding: 10px;
+  overflow: scroll;
+  max-height: 50%;
+  width: 300px;
+  opacity: 0.95;
+  visibility: hidden;
+} */
+#left-panel {
+  font-family: Tahoma, Arial, sans-serif;
+  position: relative;
+  /* left: 10px;
+  top: 80px; */
+  z-index: 1;
+  /* margin-top: 35px; */
+  background-color: #FFFFFF;
+  padding: 10px;
+  overflow: scroll;
+  max-height: 100%;
+  width: 95%;
+  opacity: 0.95;
+  visibility: hidden;
+  display: block;
 }
 
 .handle {
@@ -325,7 +376,7 @@ a {
   background-color: #FFFFFF;
   padding: 10px;
   overflow: scroll;
-  max-height: 40%;
+  max-height: 50%;
   max-width: 75%;
   opacity: 0.9;
   visibility: hidden;
@@ -515,4 +566,90 @@ body {
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {
   display: block;
+}
+
+#toggleOff, #toggleOn {
+  color: black;
+  font-size: 20px;
+  position: absolute;
+  padding-bottom: 12px;
+  margin-right: 12px;
+  margin-left: 15px;
+  top: 8%;
+  right: 2%;
+  z-index: 0;
+  visibility: hidden;
+}
+
+/* Slideshow container */
+.slideshow-container {
+  /* position: relative; */
+  background: white;
+  z-index: 1;
+  position: absolute;
+  bottom: 15%;
+  margin-left: 10%;
+  margin-right: 10%;
+  max-height: 330px;
+  width: 75%;
+  margin-left: 12.5%;
+  margin-right: 12.5%;
+  overflow: scroll;
+  visibility: hidden;
+  /* bottom: 15%;
+  margin-left: 10%;
+  margin-right: 10%;
+  z-index: 0;
+  background-color: #FFFFFF;
+  /* background-color: black; */
+  /* border-radius: 1%;
+  padding: 10px;
+  overflow: scroll;
+  max-height: 45%;
+  max-width: 80%;
+  opacity: 0.85;
+  visibility: hidden;  */
+}
+
+/* Slides */
+.mySlides {
+  display: none;
+  float: center;
+  padding: 80px;
+  /* text-align: center; */
+  z-index: 1;
+  width: 100%;
+  height: 330px;
+  overflow: scroll;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: 1%;
+  margin-top: -30px;
+  padding: 16px;
+  color: #888;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  z-index: 1000;
+}
+
+/* Position the "next button" to the right */
+.next {
+  position: absolute;
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  /* background-color: grey; */
+  opacity: 0.5;
+  color: white;
 }

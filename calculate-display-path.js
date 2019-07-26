@@ -19,7 +19,7 @@ function CalculateButton(controlDiv, listOfLocations) {
     controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
     controlUI.style.cursor = 'pointer';
     controlUI.style.marginTop = '-3px';
-    controlUI.style.marginBottom = '1px';
+    controlUI.style.marginBottom = '3px';
     controlUI.style.textAlign = 'center';
     controlUI.title = 'Click to view place';
     controlDiv.appendChild(controlUI);
@@ -92,17 +92,22 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLo
             //Set map again after previous clearing
             initAutocomplete.resetMap();
             initAutocomplete.setResult(JSON.parse(JSON.stringify(response)));
+            //paste this code under the head tag or in a separate js file.
+
             initAutocomplete.callVerticesPanel(listOfLocations);
             directionsDisplay.setDirections(response);
+            document.getElementById('toggleOn').style.visibility = 'visible';
+            // document.getElementsByClassName('slideshow-container')[0].style.visibility = 'visible';
             var j,
                 route = response.routes[0],
                 slide = document.createElement('div'),
                 routeSegment;
 
             // Make summary panel visible.
-            summaryPanel.style.visibility = "visible";
-            var leftPanel = document.getElementById('left-panel');
-            leftPanel.style.visibility = "visible";
+            // summaryPanel.style.visibility = "visible";
+
+            // var leftPanel = document.getElementById('left-panel');
+            // leftPanel.style.visibility = "visible";
             // For each route, display summary information.
             for (j = 0; j < route.legs.length; j += 1) {
                 slide.className = "slide";
@@ -115,7 +120,8 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, listOfLo
                 slide.innerHTML += route.legs[j].distance.text + '<br><br>';
             }
         } else {
-            window.alert('Directions request failed due to ' + status);
+            // window.alert('Directions request failed due to ' + status);
+            window.alert('Route not possible via land transport, please choose other locations.');
         }
     });
 }

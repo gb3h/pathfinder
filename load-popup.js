@@ -38,8 +38,11 @@ function createList(all_routes) {
             node.onclick = function () {
                 //Clear map from previous calculations
                 initAutocomplete.clearMap();
-
+                document.getElementsByClassName('slideshow-container')[0].style.visibility = 'hidden';
                 document.getElementById('directions-panel').style.visibility = "hidden";
+                document.getElementById('left-panel').style.visibility = "hidden";
+                document.getElementById('toggleOff').style.visibility = 'hidden';
+                document.getElementById('toggleOn').style.visibility = 'hidden';
                 initAutocomplete.callUpdateButtons(routex.route);
                 // initAutocomplete.callCalculateAndDisplay(routex.route);
                 // cleanPath(routex.route);
