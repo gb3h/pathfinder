@@ -90,12 +90,6 @@ function getPaths() {
 // Checks if user is logged in, and load correct popup
 function checkIfLoggedIn() {
     "use strict";
-    $(document).click(function (event) {
-        //if you click on anything except the modal itself or the "open modal" link, close the modal
-        if (!$(event.target).closest(".popup1" || ".popup2" || ".popup3").length) {
-            window.location.href = '#';
-        }
-    });
     // Signed in: load view paths popup
     if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
         document.getElementById("view").setAttribute("href", "#popup2");
@@ -104,7 +98,6 @@ function checkIfLoggedIn() {
     } else {
         document.getElementById("view").setAttribute("href", "#popup1");
     }
-
     return false;
 }
 

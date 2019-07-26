@@ -7,7 +7,7 @@ html, body {
 }
 
 body.keyboard {
-  height: calc(100% - 250px);
+  height: calc(100% - 180px);
 }
 
 /* Tab Title: Path Finder */

@@ -20,12 +20,13 @@
 
     <!-- <meta http-equiv="refresh" content="0;URL=https://path-finder-orbital.herokuapp.com" /> -->
     <!-- Redirect http traffic to https -->
-    <!-- <script>
-      var loc = window.location.href + '';
-      if (loc.indexOf('http://') == 0) {
-        window.location.href = loc.replace('http://', 'https://');
-      } -->
-    </script>
+
+    <!-- <script> -->
+    <!-- // var loc = window.location.href + '';
+    // if (loc.indexOf('http://') == 0) {
+    // window.location.href = loc.replace('http://', 'https://');
+    // } -->
+    <!-- </script> -->
     <link rel="preconnect" href="https://accounts.google.com">
     <link rel="preconnect" href="https://apis.google.com">
 
@@ -102,7 +103,7 @@
 
 
     <!-- Pop-up 1: requiring sign-in first if not signed in -->
-    <div id="popup1" class="overlay">
+    <div id="popup1" class="overlay" onclick="window.location.href = '#'">
       <div class="popup1">
         <h2>Please sign in first</h2>
         <a id="close1" class="close" href="#">&times;</a>
@@ -116,24 +117,24 @@
     </div>
 
     <!-- Pop-up 2: to choose routes if signed in-->
-    <div id="popup2" class="overlay">
+    <div id="popup2" class="overlay" onclick="window.location.href = '#'">
       <div class="popup2">
-        <h2><a href="/paths">Please choose a route</a></h2>
+        <h2>Please choose a route</h2>
         <a class="close" href="#">&times;</a>
         <ul id="myList"></ul>
       </div>
     </div>
 
-    <!-- Pop-up 2: to choose routes if signed in-->
-    <div id="popup3" class="overlay">
-      <div class="popup2">
+    <!-- Pop-up 3: User Guide-->
+    <div id="popup3" class="overlay" onclick="window.location.href = '#'">
+      <div class=" popup2">
         <h2>User guide</h2>
         <p style="color: #2F4F4F; font-size: 15px; line-height: 1.5;">
           <b> Press 'Calculate!' to let us know when your path is confirmed. Only then can saving/ updating/ exporting work. </b>
         </p>
 
 
-        <a class="close" href="#">&times;</a>
+        <a id="close1" class="close" href="#">&times;</a>
 
         <br />
         <h2> To create a new path</h2>
@@ -188,34 +189,34 @@
         <h2>Keyboard shortcuts</h2>
         <div class="content">
           <table style="line-height: 1.5;">
-            <col width="100" , row height="150">
+            <col width="130" , row height="150">
             <tr>
               <td><b> a </b></td>
               <td> Add location</td>
             </tr>
             <tr>
-              <td><b> Ctrl + c </b></td>
+              <td><b> Ctrl/Cmd + c </b></td>
               <td> Calculate path</td>
             </tr>
             <tr>
-              <td><b> Ctrl + e </b></td>
+              <td><b> Ctrl/Cmd + e </b></td>
               <td> Edit path</td>
             </tr>
             <tr>
-              <td><b> Ctrl + s </b></td>
+              <td><b> Ctrl/Cmd + s </b></td>
               <td> Save new path </td>
             </tr>
             <tr>
-              <td><b> Ctrl + s </b></td>
+              <td><b> Ctrl/Cmd + s </b></td>
               <td> Update existing path </td>
             </tr>
             <tr>
-              <td><b> Ctrl + v</b></td>
+              <td><b> Ctrl/Cmd + v</b></td>
               <td> View all saved paths </td>
             </tr>
 
             <tr>
-              <td><b> Ctrl + D</b></td>
+              <td><b> Ctrl/Cmd + d</b></td>
               <td> Export path </td>
             </tr>
           </table>
