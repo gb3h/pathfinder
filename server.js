@@ -289,6 +289,7 @@ app.post('/add-bug', function (req, res) {
         feedback: req.body.bug
     });
     feedback.save();
+    res.redirect('/');
 });
 
 app.listen(process.env.PORT || 8002);

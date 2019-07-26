@@ -1,5 +1,11 @@
 /*global Mousetrap, console, document*/
 
+Mousetrap.bind('h', function (e) {
+    "use strict";
+    document.getElementById('help').click();
+    console.log("User Guide");
+});
+
 // Add Keyboard shortcut 'ctrl+s or command+s' to save path
 Mousetrap.bindGlobal('mod+s', function (e) {
     "use strict";

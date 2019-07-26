@@ -21,12 +21,12 @@
     <!-- <meta http-equiv="refresh" content="0;URL=https://path-finder-orbital.herokuapp.com" /> -->
     <!-- Redirect http traffic to https -->
 
-    <!-- <script> -->
-    <!-- // var loc = window.location.href + '';
-    // if (loc.indexOf('http://') == 0) {
-    // window.location.href = loc.replace('http://', 'https://');
-    // } -->
-    <!-- </script> -->
+    <script>
+      var loc = window.location.href + '';
+      if (loc.indexOf('http://') == 0) {
+        window.location.href = loc.replace('http://', 'https://');
+      }
+    </script>
     <link rel="preconnect" href="https://accounts.google.com">
     <link rel="preconnect" href="https://apis.google.com">
 
@@ -136,7 +136,7 @@
         <h2> To create a new path</h2>
         <ol style="line-height: 1.5;">
           <li>
-            Input and <mark> Add </mark> any locations you wish to visit in any order.
+            Input and <mark> Add </mark> any locations you wish to visit in any order. Hover/Click on each location button for more details.
           </li><br />
           <li>
             Press <mark> Calculate! </mark> to display the most optimal path for your locations. This is necessary for future actions.
@@ -145,14 +145,15 @@
             Drag and reorder the location buttons as you like.
           </li><br />
           <li>
-            Path complete! <mark><i class="fas fa-check"></i> Save </mark> your path or start afresh by pressing <mark><i class="fas fa-times"></i> New </mark>. </li>
-          <br />
+            Path complete! Click on <i class="far fa-eye"></i> to display a directions panel slideshow.
+          </li><br />
           <li>
-
+            <mark><i class="fas fa-check"></i> Save </mark> your path or start afresh by pressing <mark><i class="fas fa-times"></i> New </mark>.
+          </li><br />
+          <li>
             You can also <mark><i class="fas fa-external-link-alt"></i> Export </mark>your path as a pdf.
           </li><br />
         </ol>
-
 
         <h2> To edit existing saved paths </h2>
         <ol style="line-height: 1.5;">
@@ -163,7 +164,7 @@
             Click on path of choice to edit.
           </li><br />
           <li>
-            <mark> Add </mark>and remove locations as you like.
+            <mark> Add </mark>and remove locations as you like. Hover/ Click on each location button for more details.
           </li><br />
           <li>
             Press <mark> Calculate! </mark> to display the most optimal path for your locations. This is necessary for future actions.
@@ -171,10 +172,12 @@
           <li>
             Drag and reorder the location buttons as you like.</li><br />
           <li>
-            Path complete! <mark><i class="fas fa-check"></i> Update </mark> your path or start afresh by pressing <mark><i class="fas fa-times"></i> New </mark></li>
-          <br />
+            Path complete! Click on <i class="far fa-eye"></i> to display a directions panel slideshow.
+          </li><br />
           <li>
-
+            <mark><i class="fas fa-check"></i> Update </mark> your path or start afresh by pressing <mark><i class="fas fa-times"></i> New </mark>
+          </li><br />
+          <li>
             You can also <mark><i class="fas fa-external-link-alt"></i> Export </mark>your path as a pdf.
           </li><br />
           <li>
@@ -189,6 +192,10 @@
             <tr>
               <td><b> a </b></td>
               <td> Add location</td>
+            </tr>
+            <tr>
+              <td><b> h </b></td>
+              <td> User guide</td>
             </tr>
             <tr>
               <td><b> Ctrl/Cmd + c </b></td>
@@ -267,8 +274,7 @@
               </div>
             </div>
             <div class="row">
-              <input id="submitfeedback" type="submit" value="Submit" onclick=" window.location.href = '#';setTimeout(function(){
-                notifyFeedback();}, 1000);">
+              <input id="submitfeedback" type="submit" value="Submit" onclick="alert('Thank you for your response. Redirecting back to home page...')">
             </div>
           </form>
         </div>
@@ -281,9 +287,6 @@
     <!-- Integration with google maps -->
     <div id="map-container">
       <div id="map"></div>
-
-      <!-- Loading icon -->
-      <div class="se-pre-con"></div>
 
       <!-- Image Panel -->
       <div id="image-panel">
