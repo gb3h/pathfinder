@@ -113,12 +113,15 @@ function initAutocomplete() {
 
     directionsDisplay.setMap(map);
     directionsDisplay.setPanel(document.getElementById('left-panel'));
-    input.addEventListener('click', function () {
-        input.scrollIntoView(true);
+    input.addEventListener('focus', function () {
+        document.body.classList.add("keyboard");
+
     });
-    searchBox.addEventListener('click', function () {
-        searchBox.scrollIntoView(true);
+    input.addEventListener("blur", function () {
+        document.body.classList.remove("keyboard");
     });
+
+
     map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(input);
     map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(addLocationDiv);
 
