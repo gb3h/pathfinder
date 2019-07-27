@@ -9,23 +9,13 @@
     <meta charset="utf-8">
     <!-- Make it a standalone app -->
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <!-- http://localhost:8003 -->
-    <!-- <meta name="google-signin-client_id" content="814348781756-kpu2m8rvfnar9ivrof6v7f0keqls4n0o.apps.googleusercontent.com"> -->
-    <!-- https://path-finder-orbital.herokuapp.com/ -->
-    <!-- <meta name="google-signin-client_id" content="814348781756-e6kj9mrdr7im8dkit76ebt4plih06jsd.apps.googleusercontent.com"> -->
-    <!-- http://localhost:8002 -->
-    <!-- <meta name="google-signin-client_id" content="814348781756-at7u5j435edk45r985u1uitukt7sds5l.apps.googleusercontent.com"> -->
-    <!-- http://path-finder-orbital.herokuapp.com/ -->
     <meta name="google-signin-client_id" content="814348781756-ose3brjfikio60bhhnftr35bk7gnk1ca.apps.googleusercontent.com">
-
-    <!-- <meta http-equiv="refresh" content="0;URL=https://path-finder-orbital.herokuapp.com" /> -->
     <!-- Redirect http traffic to https -->
-
     <script>
-      var loc = window.location.href + '';
-      if (loc.indexOf('http://') == 0) {
-        window.location.href = loc.replace('http://', 'https://');
-      }
+      // var loc = window.location.href + '';
+      // if (loc.indexOf('http://') == 0) {
+      //   window.location.href = loc.replace('http://', 'https://');
+      // }
     </script>
     <link rel="preconnect" href="https://accounts.google.com">
     <link rel="preconnect" href="https://apis.google.com">
@@ -34,8 +24,8 @@
     <link rel="apple-touch-icon" href="app-apple-icon.png">
     <link rel="stylesheet" async type="text/css" media="screen and (max-width: 770px)" href="dist/light-theme.mobile.css">
     <link rel="stylesheet" async type="text/css" media="screen and (min-width: 771px)" href="dist/light-theme.min.css">
-    <link rel="stylesheet" async type="text/css" media="screen and (max-width: 770px)" href="index-mobile.css">
-    <link rel="stylesheet" async type="text/css" media="screen and (min-width: 771px)" href="index.css">
+    <link rel="stylesheet" async type="text/css" media="screen and (max-width: 770px)" href="index-mobile.min.css">
+    <link rel="stylesheet" async type="text/css" media="screen and (min-width: 771px)" href="index.min.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
     <link rel="manifest" href="/manifest.json">
@@ -45,7 +35,6 @@
     <div class="navbar">
       <!-- User guide popup -->
       <a id="help" href="#popup3"><i class="fas fa-question-circle"></i> Help</a>
-
       <!-- New path button -->
       <a id="new" onclick="window.location.reload();"><i class="fas fa-times"></i> New</a>
       <!-- Save path button -->
@@ -65,27 +54,6 @@
           <a id="sign-out" onclick="signOut();">Sign out</a>
 
         </div>
-        <script>
-          /* When the user clicks on the button,
-          toggle between hiding and showing the dropdown content */
-          function toggleDropDown() {
-            document.getElementById("myDropdown").classList.toggle("show");
-          }
-
-          // Close the dropdown menu if the user clicks outside of it
-          window.onclick = function(event) {
-            if (!event.target.matches('.profile')) {
-              var dropdowns = document.getElementsByClassName("dropdown-content");
-              var i;
-              for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                  openDropdown.classList.remove('show');
-                }
-              }
-            }
-          }
-        </script>
       </div>
 
     </div>
@@ -305,39 +273,9 @@
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
       </div>
-
-
-      <script>
-        var slideIndex = 1;
-        var slides = document.getElementsByClassName("mySlides");
-        showSlides(slideIndex);
-
-        function plusSlides(n) {
-          for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-          }
-          showSlides(slideIndex += n);
-
-        }
-
-        function currentSlide(n) {
-          showSlides(slideIndex = n);
-        }
-
-        function showSlides(n) {
-          var i;
-          if (n > slides.length) {
-            slideIndex = 1
-          }
-          if (n < 1) {
-            slideIndex = slides.length
-          }
-          slides[slideIndex - 1].style.display = "block";
-        }
-      </script>
     </div>
 
-
+    <script async type="text/javascript" src="obs/others-obs.js"></script>
     <form action="/download-path" method="POST" id="selectForm">
       <input type="hidden" name="selected" id="idHidden">
     </form>
@@ -358,7 +296,7 @@
     <script type="text/javascript" src="obs/sign-in-obs.js"></script>
     <script type="text/javascript" src="obs/sign-out-obs.js"></script>
     <script type="text/javascript" src="obs/save-path-obs.js"></script>
-    <script type="text/javascript" src="obs/delete-path-obs.js"></script> ---
+    <script type="text/javascript" src="obs/delete-path-obs.js"></script>
     <script type="text/javascript" src="obs/location-buttons-obs.js"></script>
     <script type="text/javascript" src="obs/autocomplete-search-obs.js"></script>
     <script type="text/javascript" src="obs/load-popup-obs.js"></script>
