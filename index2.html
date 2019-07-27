@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title> Pathfinder </title>
+    <meta name="Description" content="Pathfinder, your best travel buddy.">
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1,user-scalable=no" />
+    <meta name="theme-color" content="#FFFFFF" />
+    <meta charset="utf-8">
+    <!-- Make it a standalone app -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- http://localhost:8003 -->
+    <!-- <meta name="google-signin-client_id" content="814348781756-kpu2m8rvfnar9ivrof6v7f0keqls4n0o.apps.googleusercontent.com"> -->
+    <!-- https://path-finder-orbital.herokuapp.com/ -->
+    <!-- <meta name="google-signin-client_id" content="814348781756-e6kj9mrdr7im8dkit76ebt4plih06jsd.apps.googleusercontent.com"> -->
+    <!-- http://localhost:8002 -->
+    <!-- <meta name="google-signin-client_id" content="814348781756-at7u5j435edk45r985u1uitukt7sds5l.apps.googleusercontent.com"> -->
+    <!-- http://path-finder-orbital.herokuapp.com/ -->
+    <meta name="google-signin-client_id" content="814348781756-ose3brjfikio60bhhnftr35bk7gnk1ca.apps.googleusercontent.com">
+
+    <!-- <meta http-equiv="refresh" content="0;URL=https://path-finder-orbital.herokuapp.com" /> -->
+    <!-- Redirect http traffic to https -->
+
+    <script>
+      var loc = window.location.href + '';
+      if (loc.indexOf('http://') == 0) {
+        window.location.href = loc.replace('http://', 'https://');
+      }
+    </script>
+    <link rel="preconnect" href="https://accounts.google.com">
+    <link rel="preconnect" href="https://apis.google.com">
+
+    <!-- App icon for adding to home screen -->
+    <link rel="apple-touch-icon" href="app-apple-icon.png">
+    <link rel="stylesheet" async type="text/css" media="screen and (max-width: 770px)" href="dist/light-theme.mobile.css">
+    <link rel="stylesheet" async type="text/css" media="screen and (min-width: 771px)" href="dist/light-theme.min.css">
+    <link rel="stylesheet" async type="text/css" media="screen and (max-width: 770px)" href="index-mobile.css">
+    <link rel="stylesheet" async type="text/css" media="screen and (min-width: 771px)" href="index.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <link rel="manifest" href="/manifest.json">
+  </head>
+
+  <body>
+    <div class="navbar">
+      <!-- User guide popup -->
+      <a id="help" href="#popup3"><i class="fas fa-question-circle"></i> Help</a>
+
+      <!-- New path button -->
+      <a id="new" onclick="window.location.reload();"><i class="fas fa-times"></i> New</a>
+      <!-- Save path button -->
+      <a id="save" onclick="savePath()" href="#"><i class="fas fa-check"></i> Save</a>
+      <!-- Download path button -->
+      <a id="download" onclick="downloadPath()"><i class="fas fa-external-link-alt"></i> Export</a>
+
+      <div class="dropdown">
+        <!-- Profile tab -->
+        <a class="profile" onclick="toggleDropDown()"><i class="fa fa-fw fa-user"></i> Profile</a>
+
+        <div id="myDropdown" class="dropdown-content">
+          <!-- View existing paths button -->
+          <a id="view" href="#popup1" onclick=checkIfLoggedIn()>View saved</a>
+
+          <!-- Google sign-out button -->
+          <a id="sign-out" onclick="signOut();">Sign out</a>
+
+        </div>
+        <script>
+          /* When the user clicks on the button,
+          toggle between hiding and showing the dropdown content */
+          function toggleDropDown() {
+            document.getElementById("myDropdown").classList.toggle("show");
+          }
+
+          // Close the dropdown menu if the user clicks outside of it
+          window.onclick = function(event) {
+            if (!event.target.matches('.profile')) {
+              var dropdowns = document.getElementsByClassName("dropdown-content");
+              var i;
+              for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                  openDropdown.classList.remove('show');
+                }
+              }
+            }
+          }
+        </script>
+      </div>
+
+    </div>
+
+    <!-- Page Title -->
+    <h2 id="page-title"> <b> PATHFINDER </b> </h2>
+    <a id="toggleOff"
+      onclick="document.getElementById('directions-panel').style.visibility = 'hidden' ; document.getElementById('left-panel').style.visibility = 'hidden'; document.getElementsByClassName('slideshow-container')[0].style.visibility = 'hidden'; document.getElementById('toggleOn').style.visibility = 'visible' ; document.getElementById('toggleOff').style.visibility = 'hidden' ;"><i
+        class="far fa-eye-slash"></i> </a>
+    <a id="toggleOn"
+      onclick="document.getElementById('directions-panel').style.visibility = 'visible'; document.getElementById('left-panel').style.visibility = 'visible';document.getElementsByClassName('slideshow-container')[0].style.visibility = 'visible'; document.getElementById('toggleOn').style.visibility = 'hidden' ; document.getElementById('toggleOff').style.visibility = 'visible' ;"><i
+        class="far fa-eye"></i> </a>
+
+
+    <!-- Pop-up 1: requiring sign-in first if not signed in -->
+    <div id="popup1" class="overlay" onclick="window.location.href = '#'">
+      <div class="popup1">
+        <h2>Please sign in first</h2>
+        <a id="close1" class="close" href="#">&times;</a>
+        <div class="content">
+          <p> Click on the button below to sign in to view your saved paths. </p>
+        </div>
+        <!-- Google sign-in button -->
+        <div class="g-signin2" data-width="300" data-height="60" data-longtitle="false" data-onsuccess="onSuccess"> </div>
+        <p> </p>
+      </div>
+    </div>
+
+    <!-- Pop-up 2: to choose routes if signed in-->
+    <div id="popup2" class="overlay" onclick="window.location.href = '#'">
+      <div class="popup2">
+        <h2>Please choose a route</h2>
+        <a class="close" href="#">&times;</a>
+        <ul id="myList"></ul>
+      </div>
+    </div>
+
+    <!-- Pop-up 3: User Guide-->
+    <div id="popup3" class="overlay" onclick="window.location.href = '#'">
+      <div class=" popup2">
+        <a id="close1" class="close" href="#">&times;</a>
+        <h2>User guide</h2>
+        <p style="color: #2F4F4F; font-size: 15px; line-height: 1.5;">
+          <b> Press 'Calculate!' to let us know when your path is confirmed. Only then can saving/ updating/ exporting work. </b>
+        </p>
+        <b><a style="color: #4682B4" id="problem" href="#popup4"> Facing problems? Click here to feedback. <br /></a></b>
+        <br />
+        <h2> To create a new path</h2>
+        <ol style="line-height: 1.5;">
+          <li>
+            Input and <mark> Add </mark> any locations you wish to visit in any order. Hover/Click on each location button for more details.
+          </li><br />
+          <li>
+            Press <mark> Calculate! </mark> to display the most optimal path for your locations. This is necessary for future actions.
+          </li><br />
+          <li>
+            Drag and reorder the location buttons as you like.
+          </li><br />
+          <li>
+            Path complete! Click on <i class="far fa-eye"></i> to display a directions panel slideshow.
+          </li><br />
+          <li>
+            <mark><i class="fas fa-check"></i> Save </mark> your path or start afresh by pressing <mark><i class="fas fa-times"></i> New </mark>.
+          </li><br />
+          <li>
+            You can also <mark><i class="fas fa-external-link-alt"></i> Export </mark>your path as a pdf.
+          </li><br />
+        </ol>
+
+        <h2> To edit existing saved paths </h2>
+        <ol style="line-height: 1.5;">
+          <li>
+            Click on <mark> <i class="fa fa-fw fa-user"></i> Profile</mark> and go to <mark> View paths </mark>.
+          </li><br />
+          <li>
+            Click on path of choice to edit.
+          </li><br />
+          <li>
+            <mark> Add </mark>and remove locations as you like. Hover/ Click on each location button for more details.
+          </li><br />
+          <li>
+            Press <mark> Calculate! </mark> to display the most optimal path for your locations. This is necessary for future actions.
+          </li><br />
+          <li>
+            Drag and reorder the location buttons as you like.</li><br />
+          <li>
+            Path complete! Click on <i class="far fa-eye"></i> to display a directions panel slideshow.
+          </li><br />
+          <li>
+            <mark><i class="fas fa-check"></i> Update </mark> your path or start afresh by pressing <mark><i class="fas fa-times"></i> New </mark>
+          </li><br />
+          <li>
+            You can also <mark><i class="fas fa-external-link-alt"></i> Export </mark>your path as a pdf.
+          </li><br />
+          <li>
+            Press <mark> Edit! </mark> to edit your path again.
+          </li><br />
+        </ol>
+
+        <h2>Keyboard shortcuts</h2>
+        <div class="content">
+          <table style="line-height: 1.5;">
+            <col width="130" , row height="150">
+            <tr>
+              <td><b> a </b></td>
+              <td> Add location</td>
+            </tr>
+            <tr>
+              <td><b> h </b></td>
+              <td> User guide</td>
+            </tr>
+            <tr>
+              <td><b> Ctrl/Cmd + c </b></td>
+              <td> Calculate path</td>
+            </tr>
+            <tr>
+              <td><b> Ctrl/Cmd + e </b></td>
+              <td> Edit path</td>
+            </tr>
+            <tr>
+              <td><b> Ctrl/Cmd + s </b></td>
+              <td> Save new path </td>
+            </tr>
+            <tr>
+              <td><b> Ctrl/Cmd + s </b></td>
+              <td> Update existing path </td>
+            </tr>
+            <tr>
+              <td><b> Ctrl/Cmd + v</b></td>
+              <td> View all saved paths </td>
+            </tr>
+
+            <tr>
+              <td><b> Ctrl/Cmd + d</b></td>
+              <td> Export path </td>
+            </tr>
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Pop-up 4: Problems, Report bug  -->
+    <div id="popup4" class="overlay">
+      <div class=" popup4">
+        <div onclick="window.location.href = '#'">
+          <a class="close" href="#">&times;</a>
+          <h2>Problems</h2>
+          <h3>[Process] failed, no locations entered. Please try again.</h3>
+          <p>
+            Press Calculate before other actions. This is for us to know when your locations are fixed and confirmed.
+          </p>
+          <h3>My location buttons are not appearing.</h3>
+          <p>
+            Please clear your browser cache. For Mac users, you can press command + shift + delete to do so. <a href="https://www.pcmag.com/article/333441/how-to-clear-your-cache-on-any-browser">For others, click me to find out how to clear your
+              browser
+              cache.</a>
+          </p>
+          <h3>My path is not listed under 'View paths' even after saving.</h3>
+          <p>
+            Please refresh the page before viewing. You can do so by pressing <mark><i class="fas fa-times"></i> New </mark>.
+          </p>
+          <h3>Facing a problem that is not covered here?</h3>
+          <p>
+            Please fill in the form below to report the bug.
+          </p>
+        </div>
+
+        <div class="container">
+          <form action="/add-bug" method="POST" id="addBug">
+            <div class="row">
+              <div class="col-25">
+                <label for="name">Name</label>
+              </div>
+              <div class="col-75">
+                <input type="text" id="name" name="name" placeholder="Enter your name..." onfocus="this.value=''" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="bug">Problem</label>
+              </div>
+              <div class="col-75">
+                <textarea id="bug" name="bug" placeholder="Write something.." onfocus="this.value=''" style="height:120px" required></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <input id="submitfeedback" type="submit" value="Submit" onclick="alert('Thank you for your response. Redirecting back to home page...')">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search country button-->
+    <input name="search" id="pac-input" class="controls" onfocus="this.value=''" type="text" placeholder="Enter a destination.">
+
+    <!-- Integration with google maps -->
+    <div id="map-container">
+      <div id="map"></div>
+
+      <!-- Image Panel -->
+      <div id="image-panel">
+        <img id="location-image" alt="Image is loading..."></img>
+        <span id="rating" class="rating-static rating-0"></span>
+        <p id="info"></p>
+      </div>
+
+      <div class="slideshow-container">
+
+        <!-- Directions panel slideshow -->
+        <div class="mySlides" id="directions-panel"></div>
+        <div class="mySlides" id="left-panel"></div>
+
+        <!-- Next/prev buttons -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+      </div>
+
+
+      <script>
+        var slideIndex = 1;
+        var slides = document.getElementsByClassName("mySlides");
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+          for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+          }
+          showSlides(slideIndex += n);
+
+        }
+
+        function currentSlide(n) {
+          showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+          var i;
+          if (n > slides.length) {
+            slideIndex = 1
+          }
+          if (n < 1) {
+            slideIndex = slides.length
+          }
+          slides[slideIndex - 1].style.display = "block";
+        }
+      </script>
+    </div>
+
+
+    <form action="/download-path" method="POST" id="selectForm">
+      <input type="hidden" name="selected" id="idHidden">
+    </form>
+
+
+
+    <!-- Load javascript files -->
+
+    <script async src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script async src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="keyboard-shortcuts/mousetrap.min.js"></script>
+    <script src="keyboard-shortcuts/mousetrap-global-bind.js"></script>
+    <script src="keyboard-shortcuts/keyboard-shortcuts-obs.js"></script>
+    <script async src="dist/growl-notification.min.js"></script>
+
+
+
+    <script type="text/javascript" src="obs/sign-in-obs.js"></script>
+    <script type="text/javascript" src="obs/sign-out-obs.js"></script>
+    <script type="text/javascript" src="obs/save-path-obs.js"></script>
+    <script type="text/javascript" src="obs/delete-path-obs.js"></script> ---
+    <script type="text/javascript" src="obs/location-buttons-obs.js"></script>
+    <script type="text/javascript" src="obs/autocomplete-search-obs.js"></script>
+    <script type="text/javascript" src="obs/load-popup-obs.js"></script>
+    <script type="text/javascript" src="obs/calculate-display-path-obs.js"></script>
+    <script type="text/javascript" src="obs/vertices-panel2-obs.js"></script>
+    <script type="text/javascript" src="obs/image-panel-obs.js"></script>
+
+    <!-- <script type="text/javascript" src="sign-in.js"></script>
+    <script type="text/javascript" src="sign-out.js"></script>
+    <script type="text/javascript" src="save-path.js"></script>
+    <script type="text/javascript" src="delete-path.js"></script>
+    <script type="text/javascript" src="location-buttons.js"></script>
+    <script type="text/javascript" src="autocomplete-search.js"></script>
+    <script type="text/javascript" src="load-popup.js"></script>
+    <script type="text/javascript" src="calculate-display-path.js"></script>
+    <script type="text/javascript" src="vertices-panel2.js"></script>
+    <script type="text/javascript" src="image-panel.js"></script> -->
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQOCk29KyMP6NzMOgsS00V_XrOkjPgeJQ&libraries=places&callback=initAutocomplete" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" async defer></script>
+
+  </body>
+
+
+
+</html>
