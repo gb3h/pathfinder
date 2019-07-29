@@ -193,7 +193,7 @@ function updateButtons(listOfLocations, map) {
         placeButtonDiv.style.maxWidth = 100 / listOfLocations.length - 3 + '%';
         placeButtonDiv.style.marginLeft = 3 / listOfLocations.length + '%';
         placeButtonDiv.style.maxHeight = '67px';
-        placeButtonDiv.style.overflow = 'scroll';
+        placeButtonDiv.style.overflow = 'hidden';
         map.controls[google.maps.ControlPosition.TOP_CENTER].push(placeButtonDiv);
     }
 

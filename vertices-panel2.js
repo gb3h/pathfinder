@@ -1,6 +1,6 @@
 /*global document, window, alert, console, confirm, google, gapi, moment, $, setTimeout*/
 
-var Sortable, cleanPath, initAutocomplete, getImageUrl;
+//var Sortable, getImageUrl;
 
 function verticesPanel(map, resultObject, listOfLocations) {
     "use strict";
@@ -15,17 +15,20 @@ function verticesPanel(map, resultObject, listOfLocations) {
     map.controls[google.maps.ControlPosition.TOP_CENTER].clear();
 
     // Create sortable vertices panel.
+    console.log(listOfLocations);
     var newUnorderedLocations = [],
-        vp = document.createElement('ul'),
-        sortable = new Sortable(vp, {
+        vp = document.createElement('ul');
+    vp.setAttribute('id', 'sortable');
+    var sortable = new Sortable(vp, {
             animation: 150,
-            filter: '.filtered',
-            onUpdate: function () {
+            sort: true,
+            onUpdate: function (evt) {
                 var i, newOrderedLocations = [],
                     listElements = $("#sortable").children();
                 console.log(listElements.length);
+                console.log(evt.to);
                 for (i = 0; i < listElements.length; i += 1) {
-                    console.log(listElements[i].innerText + " " + listElements[i].getAttribute('place_id'));
+                    console.log("test " + listElements[i].innerText + " " + listElements[i].getAttribute('place_id'));
                     newOrderedLocations.push({
                         name: listElements[i].innerText,
                         place_id: listElements[i].getAttribute('place_id'),
@@ -41,7 +44,7 @@ function verticesPanel(map, resultObject, listOfLocations) {
             }
         });
 
-    vp.setAttribute('id', 'sortable');
+    
 
     // Create new unorderedlocations .
     resultObject.routes[0].legs.forEach(function (obj) {

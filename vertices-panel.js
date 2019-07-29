@@ -37,7 +37,7 @@ function VerticesPanel(resultObject, map) {
       vp.appendChild(vertexDiv);
       if ((i === 0) || (i === (resultObject.geocoded_waypoints.length - 1))) {
         var j = i;
-        vertexDiv.className = "filtered";
+        vertexDiv.className = "dsfiltered";
       } else {
         var j = resultObject.routes[0].waypoint_order[i - 1] + 1;
       }

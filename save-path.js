@@ -9,7 +9,7 @@ var locations = [],
 function cleanPhotos(location) {
     "use strict";
     var photourls = [];
-    if (location.photos !== undefined) {
+    if (location.photos !== undefined && location.photos !== null) {
 
         // Checks if location photos is in the correct format before returning
         if ((location.photos[0] instanceof Array) || typeof location.photos[0] === "string") {
@@ -71,6 +71,7 @@ function cleanPath(listOfLocations) {
 
     // Format the path properly
     listOfLocations.forEach(function (location) {
+        console.log(location.place_id);
         locations.push({
             name: location.name,
             formatted_address: location.formatted_address,
@@ -84,7 +85,7 @@ function cleanPath(listOfLocations) {
             }
         });
     });
-    return listOfLocations;
+    return locations;
 }
 
 // Notify users if the save/update has failed/ succeeded
