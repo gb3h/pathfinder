@@ -9,12 +9,12 @@
     <meta charset="utf-8">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="google-signin-client_id" content="814348781756-ose3brjfikio60bhhnftr35bk7gnk1ca.apps.googleusercontent.com">
-    <!-- <script>
+    <script>
       var loc = window.location.href + '';
       if (loc.indexOf('http://') == 0) {
         window.location.href = loc.replace('http://', 'https://');
       }
-    </script> -->
+    </script>
     <link rel="preconnect" href="https://accounts.google.com">
     <link rel="preconnect" href="https://apis.google.com">
     <link rel="apple-touch-icon" href="app-apple-icon.png">
@@ -218,7 +218,7 @@
               </div>
             </div>
             <div class="row">
-              <input id="submitfeedback" type="submit" value="Submit" onclick="alert('Thank you for your response. Redirecting back to home page...')">
+              <input id="submitfeedback" type="submit" value="Submit" onclick="alert('Thank you for your response. Press close to return back to the home page...')">
             </div>
           </form>
         </div>
@@ -252,16 +252,16 @@
     <script src="keyboard-shortcuts/keyboard-shortcuts-obs.js"></script>
     <script async src="dist/growl-notification.min.js"></script>
     <script type="text/javascript" src="obs/others-obs.js"></script>
-    <script type="text/javascript" src="obs/sign-in-obs.js"></script>
-    <script type="text/javascript" src="obs/sign-out-obs.js"></script>
-    <script type="text/javascript" src="obs/save-path-obs.js"></script>
-    <script type="text/javascript" src="obs/delete-path-obs.js"></script>
-    <script type="text/javascript" src="obs/location-buttons-obs.js"></script>
-    <script type="text/javascript" src="obs/autocomplete-search-obs.js"></script>
-    <script type="text/javascript" src="obs/load-popup-obs.js"></script>
-    <script type="text/javascript" src="obs/calculate-display-path-obs.js"></script>
-    <script type="text/javascript" src="obs/vertices-panel2-obs.js"></script>
-    <script type="text/javascript" src="obs/image-panel-obs.js"></script>
+    <script type="text/javascript" src="obs/in-obs.js"></script>
+    <script type="text/javascript" src="obs/out-obs.js"></script>
+    <script type="text/javascript" src="obs/save-obs.js"></script>
+    <script type="text/javascript" src="obs/delete-obs.js"></script>
+    <script type="text/javascript" src="obs/loc-obs.js"></script>
+    <script type="text/javascript" src="obs/auto-obs.js"></script>
+    <script type="text/javascript" src="obs/load-obs.js"></script>
+    <script type="text/javascript" src="obs/cal-obs.js"></script>
+    <script type="text/javascript" src="obs/vert-obs.js"></script>
+    <script type="text/javascript" src="obs/img-obs.js"></script>
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQOCk29KyMP6NzMOgsS00V_XrOkjPgeJQ&libraries=places&callback=initAutocomplete" async defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" async defer></script>

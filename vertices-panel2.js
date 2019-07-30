@@ -20,37 +20,45 @@ function verticesPanel(map, resultObject, listOfLocations) {
         vp = document.createElement('ul');
     vp.setAttribute('id', 'sortable');
     var sortable = new Sortable(vp, {
-            animation: 150,
-            sort: true,
-            onUpdate: function (evt) {
-                var i, newOrderedLocations = [],
-                    listElements = $("#sortable").children();
-                console.log(listElements.length);
-                console.log(evt.to);
-                for (i = 0; i < listElements.length; i += 1) {
-                    console.log("test " + listElements[i].innerText + " " + listElements[i].getAttribute('place_id'));
-                    newOrderedLocations.push({
-                        name: listElements[i].innerText,
-                        place_id: listElements[i].getAttribute('place_id'),
-                        formatted_address: listElements[i].getAttribute('formatted_address'),
-                        rating: listElements[i].getAttribute('rating'),
-                        lat: listElements[i].getAttribute('lat'),
-                        lng: listElements[i].getAttribute('lng'),
-                        photos: JSON.parse(listElements[i].getAttribute('photos'))
-                    });
-                }
-                cleanPath(newOrderedLocations);
-                initAutocomplete.callCalculateAndDisplay(newOrderedLocations, false);
+        animation: 150,
+        sort: true,
+        onUpdate: function (evt) {
+            var i, newOrderedLocations = [],
+                listElements = $("#sortable").children();
+            console.log(listElements.length);
+            console.log(evt.to);
+            for (i = 0; i < listElements.length; i += 1) {
+                console.log("test " + listElements[i].innerText + " " + listElements[i].getAttribute('place_id'));
+                newOrderedLocations.push({
+                    name: listElements[i].innerText,
+                    place_id: listElements[i].getAttribute('place_id'),
+                    formatted_address: listElements[i].getAttribute('formatted_address'),
+                    rating: listElements[i].getAttribute('rating'),
+                    lat: listElements[i].getAttribute('lat'),
+                    lng: listElements[i].getAttribute('lng'),
+                    photos: JSON.parse(listElements[i].getAttribute('photos'))
+                });
             }
-        });
+            cleanPath(newOrderedLocations);
+            initAutocomplete.callCalculateAndDisplay(newOrderedLocations, false);
+        }
+    });
 
-    
+
 
     // Create new unorderedlocations .
-    resultObject.routes[0].legs.forEach(function (obj) {
+    resultObject.routes[0].legs.forEach(function (obj, i) {
         listOfLocations.forEach(function (location) {
             if (location.formatted_address === obj.start_address) {
                 newUnorderedLocations.push(location);
+            } else {
+                console.log(location.formatted_address + " VS " +
+                    obj.start_address);
+                if (location.place_id === resultObject.geocoded_waypoints[i].place_id) {
+                    newUnorderedLocations.push(location);
+                } else {
+                    console.log(location.place_id + "VS" + resultObject.geocoded_waypoints[i].place_id);
+                }
             }
         });
     });
